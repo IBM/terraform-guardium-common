@@ -1,0 +1,2 @@
+profile_definition_name,name,description,credential_name,cluster_name,region,log_group,start_position,interval,event_filter,account_id,prefix,codec_pattern
+Postgres over Cloudwatch Logs,${udc_name},${description},${credential_name},${cluster_name},${aws_region},"${aws_log_group}",${start_position},${interval},${event_filter},${aws_account_id},false,${codec_pattern}

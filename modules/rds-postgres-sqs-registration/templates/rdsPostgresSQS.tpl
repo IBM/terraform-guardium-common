@@ -1,0 +1,2 @@
+profile_definition_name,name,description,credential_name,instance_name,region,start_position,interval,event_filter,account_id,prefix,codec,queue
+Postgres over SQS,${udc_name},${description},${credential_name},${cluster_name},${aws_region},${start_position},${interval},${event_filter},${aws_account_id},false,${codec_pattern},${queue_name}
