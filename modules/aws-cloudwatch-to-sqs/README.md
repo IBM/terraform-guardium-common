@@ -17,7 +17,7 @@ This architecture enables Guardium to consume AWS service logs from CloudWatch v
 
 ```hcl
 module "cloudwatch_to_sqs" {
-  source = "../../modules/common/aws-cloudwatch-to-sqs"
+  source = "IBM/common/guardium//modules/aws-cloudwatch-to-sqs"
 
   name_prefix      = "my-service"
   datastore_type   = "dynamodb"
