@@ -3,12 +3,12 @@ terraform {
   required_providers {
     gdp-middleware-helper = {
       source  = "IBM/gdp-middleware-helper"
-      version = "0.0.1"
+      version = ">= 1.0.0"
     }
 
     guardium-data-protection = {
       source  = "IBM/guardium-data-protection"
-      version = "0.0.1"
+      version = ">= 1.0.0"
     }
 
     aws = {

@@ -21,7 +21,7 @@ locals {
 }
 
 module "cloudwatch_to_sqs" {
-  source = "../aws-cloudwatch-to-sqs"
+  source = "IBM/common/guardium//modules/aws-cloudwatch-to-sqs"
   datastore_type    = "rds_postgres"
   name_prefix       = var.postgres_rds_cluster_identifier
   lambda_source_file = "${path.cwd}/files/postgres-lambda-function.py"
@@ -30,7 +30,7 @@ module "cloudwatch_to_sqs" {
 }
 
 module "universal_connector" {
-  source = "../../universal-connector/install-gdp-connector"
+  source = "IBM/gdp/guardium//modules/connect-datasource-to-uc"
   count  = var.enable_universal_connector ? 1 : 0  # Skip creation when disabled
 
   udc_name               = local.udc_name_safe
