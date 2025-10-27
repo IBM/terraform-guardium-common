@@ -9,7 +9,7 @@ terraform {
 
     gdp-middleware-helper = {
       source  = IBM/gdp-middleware-helper"
-      version = "0.0.3"
+      version = "0.0.1"
     }
   }
 }
