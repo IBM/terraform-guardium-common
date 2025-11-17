@@ -1,10 +1,18 @@
+#
+# Copyright IBM Corp. 2025
+# SPDX-License-Identifier: Apache-2.0
+#
+
 locals {
   # Create a sanitized version of the UDC name for file paths
   udc_name = format("%s-%s-%s", var.aws_region, var.log_group, var.aws_account_id)
   udc_name_safe = replace(local.udc_name, "/", "-")
 
+  # Template file based on database engine
+  template_file = var.db_engine == "mysql" ? "mysqlCloudwatch.tpl" : "mariadbCloudwatch.tpl"
+
   # Generate the CSV content from the template
-  udc_csv = templatefile("${path.module}/templates/rdsMariaDBCloudWatch.tpl", {
+  udc_csv = templatefile("${path.module}/templates/${local.template_file}", {
     udc_name        = local.udc_name_safe
     credential_name = var.udc_aws_credential
     aws_region      = var.aws_region
@@ -13,10 +21,10 @@ locals {
     start_position  = var.csv_start_position
     interval        = var.csv_interval
     event_filter    = var.csv_event_filter
-    description     = "GDP AWS RDS MariaDB connector for ${var.mariadb_rds_cluster_identifier}"
+    description     = "GDP AWS RDS ${title(var.db_engine)} connector for ${var.rds_cluster_identifier}"
     codec_pattern   = var.codec_pattern
-    cluster_name    = var.mariadb_rds_cluster_identifier
-    cloudwatch_endpoint        = var.cloudwatch_endpoint
+    cluster_name    = var.rds_cluster_identifier
+    cloudwatch_endpoint = var.cloudwatch_endpoint
     use_aws_bundled_ca = var.use_aws_bundled_ca
   })
 }

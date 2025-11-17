@@ -1,3 +1,8 @@
+#
+# Copyright IBM Corp. 2025
+# SPDX-License-Identifier: Apache-2.0
+#
+
 //////
 // AWS variables
 //////
@@ -8,10 +13,18 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
-variable "mariadb_rds_cluster_identifier" {
+variable "db_engine" {
   type        = string
-  default     = "guardium-mariadb"
-  description = "MariaDB RDS cluster identifier to be monitored"
+  description = "Database engine type (mysql or mariadb)"
+  validation {
+    condition     = contains(["mysql", "mariadb"], var.db_engine)
+    error_message = "The db_engine value must be either 'mysql' or 'mariadb'."
+  }
+}
+
+variable "rds_cluster_identifier" {
+  type        = string
+  description = "RDS cluster identifier to be monitored"
 }
 
 variable "aws_account_id" {
@@ -30,13 +43,13 @@ variable "log_group" {
 variable "udc_name" {
   type        = string
   description = "Name for universal connector. Is used for all aws objects"
-  default     = "mariadb-gdp"
+  default     = "rds-gdp"
 }
 
 
 variable "udc_aws_credential" {
   type        = string
-  description = "name of AWS credential defined in Guardium"
+  description = "Name of AWS credential defined in Guardium"
 }
 
 variable "gdp_client_secret" {
@@ -116,7 +129,7 @@ variable "csv_event_filter" {
 
 variable "codec_pattern" {
   type = string
-  description = "codec_pattern for rds mariadb"
+  description = "codec_pattern for rds database"
   default = "plain"
 }
 
