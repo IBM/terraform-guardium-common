@@ -11,7 +11,14 @@ variable "tags" {
 
 variable "lambda_source_file" {
     type = string
-    description = "The code to be used for the lamda function"
+    description = "The code to be used for the lambda function (deprecated, use lambda_zip_file)"
+    default = null
+}
+
+variable "lambda_zip_file" {
+    type = string
+    description = "Path to pre-built lambda zip file"
+    default = null
 }
 
 variable "datastore_type" {

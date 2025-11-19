@@ -98,18 +98,30 @@ resource "aws_iam_policy_attachment" "sqs_lambda_role_events" {
   }
 }
 
+# Create zip from source file if lambda_source_file is provided (legacy support)
 data "archive_file" "sqs_lambda" {
+  count       = var.lambda_source_file != null ? 1 : 0
   type        = "zip"
   source_file = var.lambda_source_file
   output_path = "${path.module}/files/function.zip"
+}
+
+# Use pre-built zip file or dynamically created one
+locals {
+  lambda_filename = var.lambda_zip_file != null ? var.lambda_zip_file : (
+    var.lambda_source_file != null ? data.archive_file.sqs_lambda[0].output_path : null
+  )
+  lambda_source_hash = var.lambda_zip_file != null ? filebase64sha256(var.lambda_zip_file) : (
+    var.lambda_source_file != null ? data.archive_file.sqs_lambda[0].output_base64sha256 : null
+  )
 }
 
 resource "aws_lambda_function" "guardium" {
   function_name    = "${var.name_prefix}-Export-CloudWatch-Logs-To-SQS-${var.datastore_type}"
   role             = aws_iam_role.sqs_lambda_role.arn
   handler          = var.handler
-  filename         = data.archive_file.sqs_lambda.output_path
-  source_code_hash = data.archive_file.sqs_lambda.output_base64sha256
+  filename         = local.lambda_filename
+  source_code_hash = local.lambda_source_hash
   runtime          = var.lambda_runtime
   environment {
     variables = {

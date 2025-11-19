@@ -27,11 +27,11 @@ locals {
 
 module "cloudwatch_to_sqs" {
   source = "../aws-cloudwatch-to-sqs"
-  datastore_type    = "aurora_postgres"
-  name_prefix       = var.aurora_postgres_cluster_identifier
-  lambda_source_file = "${path.module}/files/aurora-postgres-lambda-function.py"
-  log_group         = var.log_group
-  handler = "aurora-postgres-lambda-function.lambda_handler"
+  datastore_type     = "aurora_postgres"
+  name_prefix        = var.aurora_postgres_cluster_identifier
+  lambda_zip_file    = "${path.module}/files/aurora-postgres-lambda-function.zip"
+  log_group          = var.log_group
+  handler            = "lambda_function.lambda_handler"
 }
 
 module "universal_connector" {
