@@ -15,7 +15,6 @@ variable "aws_region" {
 
 variable "aurora_postgres_cluster_identifier" {
   type        = string
-  default     = "guardium-aurora-postgres"
   description = "Aurora PostgreSQL cluster identifier to be monitored"
 }
 
