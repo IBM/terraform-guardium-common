@@ -1,3 +1,8 @@
+#
+# Copyright IBM Corp. 2025
+# SPDX-License-Identifier: Apache-2.0
+#
+
 locals {
   # Create a sanitized version of the UDC name for file paths
   udc_name = format("%s-%s-%s", var.aws_region, var.log_group, var.aws_account_id)

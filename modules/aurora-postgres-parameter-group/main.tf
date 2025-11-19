@@ -1,3 +1,8 @@
+#
+# Copyright IBM Corp. 2025
+# SPDX-License-Identifier: Apache-2.0
+#
+
 data "aws_rds_cluster" "cluster_metadata" {
   cluster_identifier = var.aurora_postgres_cluster_identifier
 }
