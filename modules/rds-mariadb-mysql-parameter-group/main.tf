@@ -40,14 +40,20 @@ locals {
   # Use a custom description that includes the engine type
   description = format("Custom parameter group for enabling %s audit for %s", var.db_engine, var.rds_cluster_identifier)
 
-  # Get option group details based on engine type
-  option_group = var.db_engine == "mariadb" ? (
+  # Get raw option group name based on engine type
+  raw_option_group = var.db_engine == "mariadb" ? (
     length(data.gdp-middleware-helper_rds_mariadb.mariadb_parameter_group) > 0 ?
     data.gdp-middleware-helper_rds_mariadb.mariadb_parameter_group[0].option_group : ""
   ) : (
     length(data.gdp-middleware-helper_rds_mysql.mysql_parameter_group) > 0 ?
     data.gdp-middleware-helper_rds_mysql.mysql_parameter_group[0].option_group : ""
   )
+
+  # Check if using default option group (starts with "default:")
+  is_default_option_group = can(regex("^default:", local.raw_option_group))
+
+  # Generate custom name if default, otherwise sanitize existing name
+  option_group = local.is_default_option_group ? format("guardium-%s-option-group-%s", var.db_engine, var.rds_cluster_identifier) : lower(replace(local.raw_option_group, "/[^a-zA-Z0-9-]/", "-"))
 
   engine_name = var.db_engine == "mariadb" ? (
     length(data.gdp-middleware-helper_rds_mariadb.mariadb_parameter_group) > 0 ?
