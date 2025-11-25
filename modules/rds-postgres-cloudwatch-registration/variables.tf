@@ -118,4 +118,9 @@ variable "codec_pattern" {
   description = "codec_pattern for rds postgres"
   default = "plain"
 }
+variable "log_directory" {
+  type        = string
+  description = "Directory on Guardium server where CSV configuration files will be stored"
+  default     = "/var/log/guardium"
+}
 

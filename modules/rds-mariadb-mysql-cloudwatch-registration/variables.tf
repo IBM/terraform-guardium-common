@@ -144,3 +144,9 @@ variable "use_aws_bundled_ca" {
   description = "Whether to use the AWS bundled CA certificates"
   default = true
 }
+
+variable "log_directory" {
+  type        = string
+  description = "Directory path on Guardium server where CSV files will be stored. Defaults to /var/log/guardium if not specified."
+  default     = ""
+}

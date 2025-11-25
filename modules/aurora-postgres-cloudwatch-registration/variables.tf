@@ -122,4 +122,10 @@ variable "codec_pattern" {
   type        = string
   description = "codec_pattern for Aurora PostgreSQL"
   default     = "plain"
+
+variable "log_directory" {
+  type        = string
+  description = "Directory on Guardium server where CSV configuration files will be stored"
+  default     = "/var/log/guardium"
+}
 }

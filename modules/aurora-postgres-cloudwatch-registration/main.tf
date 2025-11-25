@@ -39,4 +39,5 @@ module "universal_connector" {
   gdp_ssh_username       = var.gdp_ssh_username
   gdp_ssh_privatekeypath = var.gdp_ssh_privatekeypath
   gdp_mu_host            = var.gdp_mu_host
+  log_directory          = var.log_directory
 }
