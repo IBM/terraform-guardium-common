@@ -37,7 +37,7 @@ module "universal_connector" {
   udc_csv_parsed = local.udc_csv
   
   # Log directory configuration - defaults to /var/log/guardium if not specified
-  log_directory = var.log_directory
+  profile_upload_directory = var.profile_upload_directory
   
   client_id              = var.gdp_client_id
   client_secret          = var.gdp_client_secret
