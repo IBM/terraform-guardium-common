@@ -33,11 +33,6 @@ variable "rds_cluster_identifier" {
   description = "RDS cluster identifier to be monitored"
 }
 
-variable "db_major_version" {
-  type        = string
-  description = "The major version of the database (e.g., '5.7' for MySQL, '10.6' for MariaDB)"
-}
-
 //////
 // Audit Plugin Configuration
 //////
