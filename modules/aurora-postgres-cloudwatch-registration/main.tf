@@ -41,4 +41,5 @@ module "universal_connector" {
   gdp_mu_host            = var.gdp_mu_host
   profile_upload_directory = var.profile_upload_directory
   profile_api_directory    = var.profile_api_directory
+  use_multipart_upload     = var.use_multipart_upload
 }
