@@ -25,7 +25,7 @@ locals {
 }
 
 module "universal_connector" {
-  source = "IBM/gdp/guardium//modules/connect-datasource-to-uc"
+  source = "/Users/suprajavempalli/GDSC/terraform-guardium-gdp/modules/connect-datasource-to-uc"
   count  = var.enable_universal_connector ? 1 : 0  # Skip creation when disabled
   
   udc_name = local.udc_name_safe
