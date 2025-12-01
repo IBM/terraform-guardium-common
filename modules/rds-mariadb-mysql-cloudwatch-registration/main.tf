@@ -38,6 +38,7 @@ module "universal_connector" {
   
   profile_upload_directory = var.profile_upload_directory
   profile_api_directory    = var.profile_api_directory
+  use_multipart_upload     = var.use_multipart_upload
   
   client_id              = var.gdp_client_id
   client_secret          = var.gdp_client_secret

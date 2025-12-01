@@ -90,6 +90,18 @@ variable "gdp_mu_host" {
   description = "Comma separated list of Guardium Managed Units to deploy profile"
 }
 
+variable "profile_upload_directory" {
+  type        = string
+  description = "Directory path for SFTP upload (chroot path for CLI user)"
+  default     = "/upload"
+}
+
+variable "profile_api_directory" {
+  type        = string
+  description = "Full filesystem path for Guardium API to read CSV files"
+  default     = "/var/IBM/Guardium/file-server/upload"
+}
+
 //////
 // Universal Connector Control
 //////
@@ -118,20 +130,14 @@ variable "csv_event_filter" {
   default     = ""
 }
 
+variable "use_multipart_upload" {
+  type        = bool
+  description = "Use multipart/form-data upload instead of SFTP (recommended). Set to false to use legacy SFTP method."
+  default     = true
+}
+
 variable "codec_pattern" {
   type        = string
   description = "codec_pattern for Aurora PostgreSQL"
   default     = "plain"
-}
-
-variable "profile_upload_directory" {
-  type        = string
-  description = "Directory path for SFTP upload (chroot path for CLI user)"
-  default     = "/upload"
-}
-
-variable "profile_api_directory" {
-  type        = string
-  description = "Full filesystem path for Guardium API to read CSV files"
-  default     = "/var/IBM/Guardium/file-server/upload"
 }
