@@ -6,7 +6,7 @@
 locals {
   # Create a sanitized version of the UDC name for file paths
   udc_name = format("%s-%s-%s", var.aws_region, var.log_group, var.aws_account_id)
-  udc_name_safe = replace(local.udc_name, "/", "-")
+  udc_name_safe = trimspace(replace(local.udc_name, "/", "-"))
 
   # Template file based on database engine
   template_file = var.db_engine == "mysql" ? "mysqlCloudwatch.tpl" : "mariadbCloudwatch.tpl"
@@ -35,11 +35,7 @@ module "universal_connector" {
 
   udc_name = local.udc_name_safe
   udc_csv_parsed = local.udc_csv
-  
-  profile_upload_directory = var.profile_upload_directory
-  profile_api_directory    = var.profile_api_directory
-  use_multipart_upload     = var.use_multipart_upload
-  
+
   client_id              = var.gdp_client_id
   client_secret          = var.gdp_client_secret
   gdp_server             = var.gdp_server
@@ -49,4 +45,5 @@ module "universal_connector" {
   gdp_ssh_username       = var.gdp_ssh_username
   gdp_ssh_privatekeypath = var.gdp_ssh_privatekeypath
   gdp_mu_host            = var.gdp_mu_host
+  use_multipart_upload   = var.use_multipart_upload
 }
