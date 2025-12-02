@@ -167,7 +167,7 @@ resource "gdp-middleware-helper_rds_modify" "enable_audit_logs" {
   region                   = var.aws_region
   parameter_group_name     = aws_db_parameter_group.db_param_group.name
   option_group_name        = aws_db_option_group.audit.name
-  cloudwatch_logs_exports  = ["audit"]
+  cloudwatch_logs_exports  = var.cloudwatch_logs_exports
   apply_immediately        = true
 }
 

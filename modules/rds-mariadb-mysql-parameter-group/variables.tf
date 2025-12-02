@@ -78,3 +78,9 @@ variable "audit_query_log_limit" {
   description = "Maximum query length to log in bytes (SERVER_AUDIT_QUERY_LOG_LIMIT). Queries longer than this will be truncated. Default is 1024 bytes."
   default     = "1024"
 }
+
+variable "cloudwatch_logs_exports" {
+  type        = list(string)
+  description = "List of log types to export to CloudWatch. Valid values depend on the database engine. For MySQL/MariaDB: audit, error, general, slowquery"
+  default     = ["audit"]
+}
