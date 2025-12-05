@@ -5,7 +5,8 @@
 
 locals {
   # Create a sanitized version of the UDC name for file paths
-  udc_name = format("%s-%s-%s", var.aws_region, var.log_group, var.aws_account_id)
+  # Use rds_cluster_identifier instead of log_group to avoid issues with comma-separated log groups
+  udc_name = format("%s-%s-%s", var.aws_region, var.rds_cluster_identifier, var.aws_account_id)
   udc_name_safe = trimspace(replace(local.udc_name, "/", "-"))
 
   # Template file based on database engine
@@ -46,4 +47,6 @@ module "universal_connector" {
   gdp_ssh_privatekeypath = var.gdp_ssh_privatekeypath
   gdp_mu_host            = var.gdp_mu_host
   use_multipart_upload   = var.use_multipart_upload
+  profile_upload_directory = var.profile_upload_directory
+  profile_api_directory    = var.profile_api_directory
 }
