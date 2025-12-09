@@ -141,3 +141,14 @@ variable "codec_pattern" {
   description = "codec_pattern for Aurora PostgreSQL"
   default     = "plain"
 }
+variable "cloudwatch_endpoint" {
+  type        = string
+  description = "Custom endpoint URL for AWS CloudWatch"
+  default     = ""
+}
+
+variable "use_aws_bundled_ca" {
+  type        = bool
+  description = "Whether to use the AWS bundled CA certificates"
+  default     = true
+}

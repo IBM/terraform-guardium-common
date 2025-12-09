@@ -1,2 +1,2 @@
 profile_definition_name,name,description,credential_name,region,log_group,prefix,start_position,interval,event_filter,account_id,codec_pattern,endpoint,use_aws_bundled_ca
-Postgres over Cloudwatch Logs,${udc_name},${description},${credential_name},${aws_region},"${aws_log_group}",FALSE,${start_position},${interval},${event_filter},${aws_account_id},${codec_pattern},,TRUE
+Postgres over Cloudwatch Logs,${udc_name},${description},${credential_name},${aws_region},"${aws_log_group}",FALSE,${start_position},${interval},${event_filter},${aws_account_id},${codec_pattern},${cloudwatch_endpoint},${use_aws_bundled_ca}
