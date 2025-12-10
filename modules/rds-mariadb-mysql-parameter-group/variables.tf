@@ -33,11 +33,6 @@ variable "rds_cluster_identifier" {
   description = "RDS cluster identifier to be monitored"
 }
 
-variable "db_major_version" {
-  type        = string
-  description = "The major version of the database (e.g., '5.7' for MySQL, '10.6' for MariaDB)"
-}
-
 //////
 // Audit Plugin Configuration
 //////
@@ -82,4 +77,10 @@ variable "audit_query_log_limit" {
   type        = string
   description = "Maximum query length to log in bytes (SERVER_AUDIT_QUERY_LOG_LIMIT). Queries longer than this will be truncated. Default is 1024 bytes."
   default     = "1024"
+}
+
+variable "cloudwatch_logs_exports" {
+  type        = list(string)
+  description = "List of log types to export to CloudWatch. Valid values depend on the database engine. For MySQL/MariaDB: audit, error
+  default     = ["audit"]
 }

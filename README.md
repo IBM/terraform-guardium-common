@@ -82,7 +82,6 @@ module "mariadb_mysql_parameter_group" {
 
   db_engine              = "mariadb" # or "mysql"
   rds_cluster_identifier = "my-mariadb-cluster"
-  db_major_version       = "10.6" # or "5.7" for MySQL
   
   # Optional audit configuration
   audit_events           = "CONNECT,QUERY,TABLE,QUERY_DDL,QUERY_DML,QUERY_DCL"
@@ -203,7 +202,6 @@ Creates RDS option groups for MariaDB and MySQL with the MariaDB Audit Plugin en
 **Inputs:**
 - `db_engine` (required) - Database engine type (mysql or mariadb)
 - `rds_cluster_identifier` (required) - RDS cluster identifier to be monitored
-- `db_major_version` (required) - Major version of the database (e.g., '5.7' for MySQL, '10.6' for MariaDB)
 - `aws_region` - AWS region (default: us-east-1)
 - `tags` - Map of tags to apply to resources (default: {})
 - `audit_events` - Events to audit (default: CONNECT,QUERY,TABLE,QUERY_DDL,QUERY_DML,QUERY_DCL)
