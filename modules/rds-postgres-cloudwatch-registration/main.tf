@@ -5,17 +5,19 @@ locals {
 
   # Generate the CSV content from the template
   udc_csv = templatefile("${path.module}/templates/rdsPostgresCloudwatch.tpl", {
-    udc_name        = local.udc_name_safe
-    credential_name = var.udc_aws_credential
-    aws_region      = var.aws_region
-    aws_log_group   = var.log_group
-    aws_account_id  = var.aws_account_id
-    start_position  = var.csv_start_position
-    interval        = var.csv_interval
-    event_filter    = var.csv_event_filter
-    description     = "GDP AWS RDS Postgres connector for ${var.postgres_rds_cluster_identifier}"
-    codec_pattern = var.codec_pattern
-    cluster_name    = var.postgres_rds_cluster_identifier
+    udc_name            = local.udc_name_safe
+    credential_name     = var.udc_aws_credential
+    aws_region          = var.aws_region
+    aws_log_group       = var.log_group
+    aws_account_id      = var.aws_account_id
+    start_position      = var.csv_start_position
+    interval            = var.csv_interval
+    event_filter        = var.csv_event_filter
+    description         = "GDP AWS RDS Postgres connector for ${var.postgres_rds_cluster_identifier}"
+    codec_pattern       = var.codec_pattern
+    cluster_name        = var.postgres_rds_cluster_identifier
+    cloudwatch_endpoint = var.cloudwatch_endpoint
+    use_aws_bundled_ca  = var.use_aws_bundled_ca
   })
 }
 
@@ -24,6 +26,11 @@ module "universal_connector" {
   count  = var.enable_universal_connector ? 1 : 0  # Skip creation when disabled
   udc_name = local.udc_name_safe
   udc_csv_parsed = local.udc_csv
+  
+  profile_upload_directory = var.profile_upload_directory
+  profile_api_directory    = var.profile_api_directory
+  use_multipart_upload     = var.use_multipart_upload
+  
   client_id              = var.gdp_client_id
   client_secret          = var.gdp_client_secret
   gdp_server             = var.gdp_server
@@ -33,6 +40,4 @@ module "universal_connector" {
   gdp_ssh_username       = var.gdp_ssh_username
   gdp_ssh_privatekeypath = var.gdp_ssh_privatekeypath
   gdp_mu_host            = var.gdp_mu_host
-  profile_upload_directory = var.profile_upload_directory
-  profile_api_directory    = var.profile_api_directory
 }

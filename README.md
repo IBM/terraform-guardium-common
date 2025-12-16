@@ -24,6 +24,15 @@ These modules are designed to be used as dependencies by other Guardium Terrafor
 - RDS parameter group management for PostgreSQL and MariaDB
 - Database registration with Guardium Universal Connector
 
+## Guardium Data Protection Version Compatibility
+
+**Important:** The upload method depends on your Guardium Data Protection (GDP) version:
+
+- **GDP 12.2.1 and above**: Use API-based upload by setting `use_multipart_upload = true` (default)
+- **GDP versions below 12.2.1**: Use SFTP-based upload by setting `use_multipart_upload = false`
+
+All registration modules (`*-cloudwatch-registration` and `*-sqs-registration`) support the `use_multipart_upload` variable to control the upload method.
+
 ### AWS Configuration
 
 Retrieves AWS account information and provides common data sources.
@@ -99,6 +108,7 @@ module "mariadb_mysql_parameter_group" {
 
 Registers RDS PostgreSQL instances with Guardium Universal Connector via CloudWatch.
 
+**For GDP 12.2.1 and above (API upload - recommended):**
 ```hcl
 module "postgres_cloudwatch_registration" {
   source = "IBM/terraform-guardium-common//modules/rds-postgres-cloudwatch-registration"
@@ -106,6 +116,27 @@ module "postgres_cloudwatch_registration" {
   db_instance_identifier = "my-postgres-db"
   guardium_host         = "guardium.example.com"
   guardium_port         = 8443
+  
+  # API upload (default for GDP 12.2.1+)
+  use_multipart_upload = true
+}
+```
+
+**For GDP versions below 12.2.1 (SFTP upload):**
+```hcl
+module "postgres_cloudwatch_registration" {
+  source = "IBM/terraform-guardium-common//modules/rds-postgres-cloudwatch-registration"
+
+  db_instance_identifier = "my-postgres-db"
+  guardium_host         = "guardium.example.com"
+  guardium_port         = 8443
+  
+  # SFTP upload for GDP < 12.2.1
+  use_multipart_upload = false
+  
+  # Required for SFTP method
+  gdp_ssh_username       = "guardium-ssh-user"
+  gdp_ssh_privatekeypath = "/path/to/private/key"
 }
 ```
 
@@ -113,6 +144,7 @@ module "postgres_cloudwatch_registration" {
 
 Registers RDS PostgreSQL instances with Guardium Universal Connector via SQS.
 
+**For GDP 12.2.1 and above (API upload - recommended):**
 ```hcl
 module "postgres_sqs_registration" {
   source = "IBM/terraform-guardium-common//modules/rds-postgres-sqs-registration"
@@ -120,6 +152,27 @@ module "postgres_sqs_registration" {
   db_instance_identifier = "my-postgres-db"
   sqs_queue_url         = "https://sqs.us-east-1.amazonaws.com/123456789012/guardium-logs"
   guardium_host         = "guardium.example.com"
+  
+  # API upload (default for GDP 12.2.1+)
+  use_multipart_upload = true
+}
+```
+
+**For GDP versions below 12.2.1 (SFTP upload):**
+```hcl
+module "postgres_sqs_registration" {
+  source = "IBM/terraform-guardium-common//modules/rds-postgres-sqs-registration"
+
+  db_instance_identifier = "my-postgres-db"
+  sqs_queue_url         = "https://sqs.us-east-1.amazonaws.com/123456789012/guardium-logs"
+  guardium_host         = "guardium.example.com"
+  
+  # SFTP upload for GDP < 12.2.1
+  use_multipart_upload = false
+  
+  # Required for SFTP method
+  gdp_ssh_username       = "guardium-ssh-user"
+  gdp_ssh_privatekeypath = "/path/to/private/key"
 }
 ```
 
@@ -154,6 +207,9 @@ module "mariadb_mysql_cloudwatch_registration" {
   enable_universal_connector = true
   csv_start_position        = "end"
   csv_interval              = "5"
+  
+  # Upload method (API for GDP 12.2.1+, SFTP for older versions)
+  use_multipart_upload = true  # Set to false for GDP < 12.2.1
 }
 ```
 
@@ -223,6 +279,9 @@ Registers PostgreSQL RDS instances with Guardium via CloudWatch.
 - `db_instance_identifier` - RDS instance identifier
 - `guardium_host` - Guardium host address
 - `guardium_port` - Guardium port (default: 8443)
+- `use_multipart_upload` - Use API upload (true, for GDP 12.2.1+) or SFTP (false, for GDP < 12.2.1). Default: true
+- `gdp_ssh_username` - Required when `use_multipart_upload = false`
+- `gdp_ssh_privatekeypath` - Required when `use_multipart_upload = false`
 
 ### rds-postgres-sqs-registration
 Registers PostgreSQL RDS instances with Guardium via SQS.
@@ -231,6 +290,9 @@ Registers PostgreSQL RDS instances with Guardium via SQS.
 - `db_instance_identifier` - RDS instance identifier
 - `sqs_queue_url` - SQS queue URL
 - `guardium_host` - Guardium host address
+- `use_multipart_upload` - Use API upload (true, for GDP 12.2.1+) or SFTP (false, for GDP < 12.2.1). Default: true
+- `gdp_ssh_username` - Required when `use_multipart_upload = false`
+- `gdp_ssh_privatekeypath` - Required when `use_multipart_upload = false`
 
 ### rds-mariadb-mysql-cloudwatch-registration
 Registers MariaDB and MySQL RDS instances with Guardium via CloudWatch.
@@ -259,6 +321,7 @@ Registers MariaDB and MySQL RDS instances with Guardium via CloudWatch.
 - `codec_pattern` - Codec pattern for RDS database (default: "plain")
 - `cloudwatch_endpoint` - Custom endpoint URL for AWS CloudWatch (default: "")
 - `use_aws_bundled_ca` - Whether to use the AWS bundled CA certificates (default: true)
+- `use_multipart_upload` - Use API upload (true, for GDP 12.2.1+) or SFTP (false, for GDP < 12.2.1). Default: true
 
 ## Prerequisites
 

@@ -85,6 +85,18 @@ variable "gdp_mu_host" {
   description = "Comma separated list of Guardium Managed Units to deploy profile"
 }
 
+variable "profile_upload_directory" {
+  type        = string
+  description = "Directory path for SFTP upload (chroot path for CLI user)"
+  default     = "/upload"
+}
+
+variable "profile_api_directory" {
+  type        = string
+  description = "Full filesystem path for Guardium API to read CSV files"
+  default     = "/var/IBM/Guardium/file-server/upload"
+}
+
 //////
 // Universal Connector Control
 //////
@@ -117,5 +129,11 @@ variable "codec_pattern" {
   type = string
   description = "codec_pattern for rds postgres"
   default = "plain"
+}
+
+variable "use_multipart_upload" {
+  type        = bool
+  description = "Whether to use multipart upload for CSV files (true) or SFTP (false)"
+  default     = true
 }
 

@@ -85,6 +85,18 @@ variable "gdp_mu_host" {
   description = "Comma separated list of Guardium Managed Units to deploy profile"
 }
 
+variable "profile_upload_directory" {
+  type        = string
+  description = "Directory path for SFTP upload (chroot path for CLI user)"
+  default     = "/upload"
+}
+
+variable "profile_api_directory" {
+  type        = string
+  description = "Full filesystem path for Guardium API to read CSV files"
+  default     = "/var/IBM/Guardium/file-server/upload"
+}
+
 //////
 // Universal Connector Control
 //////
@@ -118,14 +130,22 @@ variable "codec_pattern" {
   description = "codec_pattern for rds postgres"
   default = "plain"
 }
-variable "profile_upload_directory" {
+
+variable "use_multipart_upload" {
+  type        = bool
+  description = "Whether to use multipart upload for CSV files (true) or SFTP (false)"
+  default     = true
+}
+variable "cloudwatch_endpoint" {
   type        = string
-  description = "Directory path for SFTP upload (chroot path for CLI user)"
-  default     = "/upload"
+  description = "Custom endpoint URL for AWS CloudWatch"
+  default     = ""
 }
 
-variable "profile_api_directory" {
-  type        = string
-  description = "Full filesystem path for Guardium API to read CSV files"
-  default     = "/var/IBM/Guardium/file-server/upload"
+variable "use_aws_bundled_ca" {
+  type        = bool
+  description = "Whether to use the AWS bundled CA certificates"
+  default     = true
 }
+
+
