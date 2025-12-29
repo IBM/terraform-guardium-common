@@ -22,14 +22,10 @@ locals {
 }
 
 module "universal_connector" {
-  source = "IBM/gdp/guardium//modules/connect-datasource-to-uc"
+  source = "git::https://github.com/IBM/terraform-guardium-gdp.git//modules/connect-datasource-to-uc?ref=GRD-116779"
   count  = var.enable_universal_connector ? 1 : 0  # Skip creation when disabled
   udc_name = local.udc_name_safe
   udc_csv_parsed = local.udc_csv
-  
-  profile_upload_directory = var.profile_upload_directory
-  profile_api_directory    = var.profile_api_directory
-  use_multipart_upload     = var.use_multipart_upload
   
   client_id              = var.gdp_client_id
   client_secret          = var.gdp_client_secret
@@ -37,7 +33,5 @@ module "universal_connector" {
   gdp_port               = var.gdp_port
   gdp_username           = var.gdp_username
   gdp_password           = var.gdp_password
-  gdp_ssh_username       = var.gdp_ssh_username
-  gdp_ssh_privatekeypath = var.gdp_ssh_privatekeypath
   gdp_mu_host            = var.gdp_mu_host
 }
