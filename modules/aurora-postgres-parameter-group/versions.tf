@@ -6,9 +6,14 @@
 terraform {
   required_version = ">= 0.13"
   required_providers {
+    gdp-middleware-helper = {
+      source  = "IBM/gdp-middleware-helper"
+      #version = "1.3.0"  # Commented out for dev testing
+    }
+
     guardium-data-protection = {
       source  = "IBM/guardium-data-protection"
-      version = "1.2.0"
+      #version = "1.2.0"  # Commented out for dev testing
     }
 
     aws = {
