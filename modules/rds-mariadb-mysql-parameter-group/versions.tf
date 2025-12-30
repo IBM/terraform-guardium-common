@@ -14,7 +14,7 @@ terraform {
 
     gdp-middleware-helper = {
       source  = "IBM/gdp-middleware-helper"
-      #version = ">= 1.0.0"  # Commented out for dev testing
+      version = ">= 1.0.0" 
     }
   }
 }

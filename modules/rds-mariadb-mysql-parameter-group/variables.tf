@@ -81,6 +81,6 @@ variable "audit_query_log_limit" {
 
 variable "cloudwatch_logs_exports" {
   type        = list(string)
-  description = "List of log types to export to CloudWatch. Valid values depend on the database engine. For MySQL/MariaDB: audit, error
+  description = "List of log types to export to CloudWatch. Valid values depend on the database engine. For MySQL/MariaDB: audit, error"
   default     = ["audit"]
 }
