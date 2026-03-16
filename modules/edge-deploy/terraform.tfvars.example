@@ -1,0 +1,95 @@
+# GDP Edge Deployment - Example Configuration
+# Copy this file to terraform.tfvars and customize for your environment
+
+# ============================================================================
+# Scenario 1: K3S with Remote Bundle Download
+# ============================================================================
+
+edge_name   = "my-edge-cluster"
+cm_url      = "https://guardium-insights.example.com"
+oauth_token = "your-oauth-token-here"
+
+platform        = "k3s"
+k3s_master_node = "master.example.com"
+k3s_nodes       = []  # Empty to auto-detect from kubectl
+ssh_user        = "root"
+ssh_password    = "your-ssh-password"
+# ssh_key_path  = "/path/to/ssh/private/key"  # Use either password OR key
+
+# ============================================================================
+# Scenario 2: K3S with Local Bundle
+# ============================================================================
+
+# edge_bundle_directory = "/path/to/local/edge-bundle"
+# platform         = "k3s"
+# k3s_master_node  = "node1.example.com"
+# k3s_nodes        = ["node1.example.com", "node2.example.com"]
+# ssh_user         = "root"
+# ssh_password     = "password"
+# ============================================================================
+# Scenario 3: AWS EKS with Remote Bundle Download
+# ============================================================================
+
+# edge_name   = "my-edge-cluster"
+# cm_url      = "https://guardium-insights.example.com"
+# oauth_token = "your-oauth-token-here"
+#
+# platform         = "eks"
+# eks_cluster_name = "my-eks-cluster"
+# aws_region       = "us-east-1"
+# aws_profile      = "default"  # OR use aws_access_key/aws_secret_key
+# eks_ssh_user     = "ec2-user"
+# eks_ssh_key_path = "/path/to/eks-key.pem"
+# eks_hostname_type = "public"
+
+# ============================================================================
+# Scenario 4: OpenShift with kubeconfig (requires 'oc login' first)
+# ============================================================================
+
+# edge_name   = "my-edge-cluster"
+# cm_url      = "https://guardium-insights.example.com"
+# oauth_token = "your-oauth-token-here"
+#
+# platform = "openshift"
+# # Ensure you are logged in with: oc login
+
+# ============================================================================
+# Scenario 5: OpenShift with Native OAuth (no 'oc login' required)
+# ============================================================================
+# This scenario uses native OAuth authentication - no need to run 'oc login' first.
+# The provider will authenticate directly to OpenShift using the provided credentials.
+
+# edge_name   = "my-edge-cluster"
+# cm_url      = "https://guardium-insights.example.com"
+# oauth_token = "your-oauth-token-here"
+#
+# platform = "openshift"
+#
+# # Option A: Username/Password authentication
+# ocp_server   = "https://api.cluster.example.com:6443"
+# ocp_username = "admin"
+# ocp_password = "your-password"
+#
+# # Option B: Token authentication (alternative to username/password)
+# # ocp_server = "https://api.cluster.example.com:6443"
+# # ocp_token  = "sha256~your-token-here"  # Get via: oc whoami -t
+#
+# # Skip TLS verification (for self-signed certs)
+# ocp_insecure_skip_verify = true
+
+# ============================================================================
+# Monitoring Configuration
+# ============================================================================
+
+monitor_max_attempts   = 180  # ~30 min with 10s interval
+monitor_sleep_interval = 10
+
+# ============================================================================
+# General Configuration
+# ============================================================================
+
+cleanup_bundle = true
+
+# Set to true when using an external image registry (e.g. Docker Hub, Quay) instead of the CM private registry
+# Skips registry certificate installation on cluster nodes
+# external_image_registry = false

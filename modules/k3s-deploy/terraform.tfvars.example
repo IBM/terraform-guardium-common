@@ -1,0 +1,90 @@
+# K3S Installation - Example Configuration
+# Copy this file to terraform.tfvars and fill in your values
+
+# ============================================================================
+# REQUIRED: Cluster Information (from fyre-vm-deploy outputs)
+# ============================================================================
+cluster_name  = "my-test-cluster"
+domain_suffix = "fyre.ibm.com"  # or "dev.fyre.ibm.com" for beta-fyre
+
+# Master nodes (from fyre-vm output: master_nodes)
+master_nodes = [
+  "my-test-cluster-master1.fyre.ibm.com"
+]
+
+# Worker nodes (from fyre-vm output: worker_nodes)
+# Leave empty for single-node cluster
+worker_nodes = []
+
+# ============================================================================
+# REQUIRED: SSH Credentials
+# ============================================================================
+ssh_user     = "root"                    # SSH username (default: root, env: K3S_SSH_USER)
+ssh_password = "your-fyre-root-password"
+
+# ============================================================================
+# K3S Configuration
+# ============================================================================
+k3s_version          = "v1.32.3"  # Options: v1.32.3, v1.33.1, etc.
+k3s_token            = "edge1234" # Cluster authentication token
+k3s_airgap_install   = true
+airgap_installation_path = ""     # Path to local K3S airgap binary files
+
+# ============================================================================
+# K3S Installation Options
+# ============================================================================
+k3s_install_options = {
+  disable_traefik   = true    # Disable Traefik ingress controller
+  taint_masters     = true    # Taint master nodes to prevent workload scheduling
+  node_wait_timeout = "600s"  # Timeout for node readiness check
+}
+
+# ============================================================================
+# SSH Connection Options
+# ============================================================================
+ssh_options = {
+  connect_timeout       = 30  # SSH connection timeout in seconds
+  server_alive_interval = 10  # Interval for keepalive messages
+  server_alive_count    = 3   # Number of keepalive messages before disconnect
+}
+
+# ============================================================================
+# Installation Timeout
+# ============================================================================
+install_timeout_minutes = 45  # Maximum time for K3S installation
+
+# ============================================================================
+# Example: Multi-Node Cluster (3 Workers)
+# ============================================================================
+# cluster_name  = "my-multi-node-cluster"
+# domain_suffix = "fyre.ibm.com"
+#
+# master_nodes = [
+#   "my-multi-node-cluster-master1.fyre.ibm.com"
+# ]
+#
+# worker_nodes = [
+#   "my-multi-node-cluster-worker1.fyre.ibm.com",
+#   "my-multi-node-cluster-worker2.fyre.ibm.com",
+#   "my-multi-node-cluster-worker3.fyre.ibm.com"
+# ]
+
+# ============================================================================
+# Example: HA Cluster (3 Masters + 5 Workers)
+# ============================================================================
+# cluster_name  = "my-ha-cluster"
+# domain_suffix = "fyre.ibm.com"
+#
+# master_nodes = [
+#   "my-ha-cluster-master1.fyre.ibm.com",
+#   "my-ha-cluster-master2.fyre.ibm.com",
+#   "my-ha-cluster-master3.fyre.ibm.com"
+# ]
+#
+# worker_nodes = [
+#   "my-ha-cluster-worker1.fyre.ibm.com",
+#   "my-ha-cluster-worker2.fyre.ibm.com",
+#   "my-ha-cluster-worker3.fyre.ibm.com",
+#   "my-ha-cluster-worker4.fyre.ibm.com",
+#   "my-ha-cluster-worker5.fyre.ibm.com"
+# ]
