@@ -1,0 +1,2 @@
+profile_definition_name,name,description,config_mode,event_hub_connections,initial_position,threads,decorate_events,consumer_group,storage_connection
+Azure Cosmos over Event Hub,${udc_name},${description},${config_mode},"${event_hub_connections}",${initial_position},${threads},${decorate_events},${consumer_group},"${storage_connection}"
