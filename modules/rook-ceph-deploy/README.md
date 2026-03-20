@@ -2,65 +2,6 @@
 
 This directory contains Terraform configuration for deploying Rook-Ceph storage using the `terraform-provider-guardium-data-protection` provider. Supports both K3S and OpenShift platforms.
 
-## Prerequisites (Just for internal test purpose)
-
-1. **Configure Terraform to Use IBM Artifactory**
-
-Create or update `~/.terraformrc`:
-
-```hcl
-provider_installation {
-  network_mirror {
-    url = "https://na.artifactory.swg-devops.com/artifactory/sec-guardium-next-gen-terraform-local/"
-    include = ["ibm/*"]
-  }
-  direct {
-    exclude = ["ibm/*"]
-  }
-}
-```
-
-**Authentication Options:**
-
-Option A - Using `.netrc` (Recommended):
-```bash
-cat >> ~/.netrc << EOF
-machine na.artifactory.swg-devops.com
-  login your-email@ibm.com
-  password your-api-key
-EOF
-chmod 600 ~/.netrc
-```
-
-Option B - Using credentials block in `~/.terraformrc`:
-```hcl
-credentials "na.artifactory.swg-devops.com" {
-  token = "your-api-key"
-}
-```
-
-Option C - Using environment variables:
-```bash
-export ARTIFACTORY_USERNAME="your-email@ibm.com"
-export ARTIFACTORY_API_KEY="your-api-key"
-```
-
-2. **Set Up Credentials**
-
-Copy the example variables file and configure your values:
-
-```bash
-cp terraform.tfvars.example terraform.tfvars
-# Edit terraform.tfvars with your cluster details
-```
-
-Or use environment variables for SSH credentials:
-
-```bash
-export ROOK_CEPH_SSH_USER="root"
-export ROOK_CEPH_SSH_PASSWORD="your-password"
-```
-
 ## Usage
 
 ### Initialize Terraform

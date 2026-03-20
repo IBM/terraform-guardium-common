@@ -2,17 +2,16 @@
 # Copy this file to terraform.tfvars and fill in your values
 
 # ============================================================================
-# REQUIRED: Cluster Information (from fyre-vm-deploy outputs)
+# REQUIRED: Cluster Information
 # ============================================================================
 cluster_name  = "my-test-cluster"
-domain_suffix = "fyre.ibm.com"  # or "dev.fyre.ibm.com" for beta-fyre
 
-# Master nodes (from fyre-vm output: master_nodes)
+# Master nodes
 master_nodes = [
   "my-test-cluster-master1.fyre.ibm.com"
 ]
 
-# Worker nodes (from fyre-vm output: worker_nodes)
+# Worker nodes
 # Leave empty for single-node cluster
 worker_nodes = []
 
@@ -57,7 +56,6 @@ install_timeout_minutes = 45  # Maximum time for K3S installation
 # Example: Multi-Node Cluster (3 Workers)
 # ============================================================================
 # cluster_name  = "my-multi-node-cluster"
-# domain_suffix = "fyre.ibm.com"
 #
 # master_nodes = [
 #   "my-multi-node-cluster-master1.fyre.ibm.com"
@@ -73,7 +71,6 @@ install_timeout_minutes = 45  # Maximum time for K3S installation
 # Example: HA Cluster (3 Masters + 5 Workers)
 # ============================================================================
 # cluster_name  = "my-ha-cluster"
-# domain_suffix = "fyre.ibm.com"
 #
 # master_nodes = [
 #   "my-ha-cluster-master1.fyre.ibm.com",
