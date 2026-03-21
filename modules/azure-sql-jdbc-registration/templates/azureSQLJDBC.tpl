@@ -1,0 +1,2 @@
+profile_definition_name,name,description,jdbc_driver_class,jdbc_connection_string,jdbc_user,jdbc_password,schedule,clean_run,statement,use_column_value,tracking_column,tracking_column_type,last_run_metadata_path,enrollment_id
+Azure SQL over JDBC,${udc_name},${description},com.microsoft.sqlserver.jdbc.SQLServerDriver,"${jdbc_connection_string}",${jdbc_user},${jdbc_password},${schedule},${clean_run},"${statement}",${use_column_value},${tracking_column},${tracking_column_type},${last_run_metadata_path},${enrollment_id}
