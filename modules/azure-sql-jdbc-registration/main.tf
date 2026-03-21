@@ -12,17 +12,16 @@ locals {
   udc_csv = templatefile("${path.module}/templates/azureSQLJDBC.tpl", {
     udc_name               = local.udc_name_safe
     description            = "GDP Azure SQL connector for ${var.udc_name}"
-    jdbc_connection_string = var.jdbc_connection_string
-    jdbc_user              = var.jdbc_user
-    jdbc_password          = var.jdbc_password
-    schedule               = var.schedule
-    clean_run              = var.clean_run
-    statement              = var.statement
-    use_column_value       = var.use_column_value
-    tracking_column        = var.tracking_column
-    tracking_column_type   = var.tracking_column_type
-    last_run_metadata_path = var.last_run_metadata_path
+    credential_name        = var.credential_name
     enrollment_id          = var.enrollment_id
+    jdbc_connection_string = var.jdbc_connection_string
+    jdbc_driver_library    = var.jdbc_driver_library
+    statement_select       = var.statement_select
+    statement_from         = var.statement_from
+    statement_where        = var.statement_where
+    tracking_column_type   = var.tracking_column_type
+    tracking_column        = var.tracking_column
+    schedule               = var.schedule
   })
 }
 

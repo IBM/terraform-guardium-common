@@ -84,38 +84,37 @@ variable "jdbc_connection_string" {
   description = "JDBC connection string for Azure SQL Database"
 }
 
-variable "jdbc_user" {
+variable "credential_name" {
   type        = string
-  description = "JDBC username in format: user@server_instance_name"
+  description = "Name of the JDBC credential configured in Guardium CM"
+  default     = "azure-sql-jdbc-cred"
 }
 
-variable "jdbc_password" {
+variable "jdbc_driver_library" {
   type        = string
-  description = "JDBC password for Azure SQL Database"
-  sensitive   = true
+  description = "Name of the JDBC driver JAR file uploaded to Guardium CM"
+  default     = "mssql-jdbc-7.4.1.jre8.jar"
+}
+
+variable "statement_select" {
+  type        = string
+  description = "SELECT clause for the SQL query"
+}
+
+variable "statement_from" {
+  type        = string
+  description = "FROM clause for the SQL query (sys.fn_get_audit_file)"
+}
+
+variable "statement_where" {
+  type        = string
+  description = "WHERE clause for the SQL query with filters"
 }
 
 variable "schedule" {
   type        = string
   description = "Cron schedule for JDBC polling (e.g., '*/1 * * * *' for every minute)"
   default     = "*/1 * * * *"
-}
-
-variable "clean_run" {
-  type        = bool
-  description = "Whether to start from the beginning on each run"
-  default     = false
-}
-
-variable "statement" {
-  type        = string
-  description = "SQL statement to query audit logs from sys.fn_get_audit_file()"
-}
-
-variable "use_column_value" {
-  type        = bool
-  description = "Whether to use column value for tracking"
-  default     = true
 }
 
 variable "tracking_column" {
@@ -130,13 +129,8 @@ variable "tracking_column_type" {
   default     = "numeric"
 }
 
-variable "last_run_metadata_path" {
-  type        = string
-  description = "Path to store the last run metadata"
-  default     = "./.azureSQL_logstash_jdbc_last_run"
-}
-
 variable "enrollment_id" {
   type        = string
   description = "Azure enrollment ID for the account"
+  default     = "123456789"
 }
