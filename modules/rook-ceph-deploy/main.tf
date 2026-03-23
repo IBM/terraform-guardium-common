@@ -1,3 +1,6 @@
+// Copyright (c) IBM Corporation
+// SPDX-License-Identifier: Apache-2.0
+
 # Rook-Ceph Installation using Custom Terraform Provider
 # Supports both K3S and OpenShift platforms
 terraform {
@@ -13,12 +16,12 @@ terraform {
 }
 
 provider "guardium-data-protection" {
-  ssh_user     = var.ssh_user
-  ssh_password = var.ssh_password
+  rook_ceph_ssh_user     = var.ssh_user
+  rook_ceph_ssh_password = var.ssh_password
 
-  connect_timeout        = var.ssh_options.connect_timeout
-  server_alive_interval  = var.ssh_options.server_alive_interval
-  server_alive_count     = var.ssh_options.server_alive_count
+  rook_ceph_connect_timeout        = var.ssh_options.connect_timeout
+  rook_ceph_server_alive_interval  = var.ssh_options.server_alive_interval
+  rook_ceph_server_alive_count     = var.ssh_options.server_alive_count
 }
 
 resource "guardium-data-protection_rook_ceph_cluster" "this" {
@@ -26,7 +29,7 @@ resource "guardium-data-protection_rook_ceph_cluster" "this" {
   platform                    = var.platform
   target_node                 = var.target_node
   rook_ceph_version           = var.rook_ceph_version
-  rook_ceph_installation_path = var.rook_ceph_installation_path
+  airgap_rook_ceph_installation_path = var.rook_ceph_installation_path
   airgap_install              = var.rook_ceph_airgap_install
   worker_count                = var.worker_count
   taint_masters               = var.taint_masters

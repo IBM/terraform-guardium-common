@@ -1,3 +1,6 @@
+// Copyright (c) IBM Corporation
+// SPDX-License-Identifier: Apache-2.0
+
 # GDP Edge Deployment with Custom Provider
 # Deploys Guardium Data Protection Edge components using guardium-data-protection
 

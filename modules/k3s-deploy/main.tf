@@ -1,3 +1,6 @@
+// Copyright (c) IBM Corporation
+// SPDX-License-Identifier: Apache-2.0
+
 # K3S Installation with Custom Provider
 # Installs K3S on existing nodes using terraform-provider-k3s
 
@@ -18,11 +21,11 @@ terraform {
 # ============================================================================
 
 provider "guardium-data-protection" {
-  ssh_user              = var.ssh_user
-  ssh_password          = var.ssh_password
-  connect_timeout       = var.ssh_options.connect_timeout
-  server_alive_interval = var.ssh_options.server_alive_interval
-  server_alive_count    = var.ssh_options.server_alive_count
+  k3s_ssh_user              = var.ssh_user
+  k3s_ssh_password          = var.ssh_password
+  k3s_connect_timeout       = var.ssh_options.connect_timeout
+  k3s_server_alive_interval = var.ssh_options.server_alive_interval
+  k3s_server_alive_count    = var.ssh_options.server_alive_count
 }
 
 # ============================================================================

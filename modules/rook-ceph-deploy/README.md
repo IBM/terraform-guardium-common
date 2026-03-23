@@ -1,3 +1,6 @@
+// Copyright (c) IBM Corporation
+// SPDX-License-Identifier: Apache-2.0
+
 # Rook-Ceph Deploy Configuration
 
 This directory contains Terraform configuration for deploying Rook-Ceph storage using the `terraform-provider-guardium-data-protection` provider. Supports both K3S and OpenShift platforms.

@@ -1,3 +1,6 @@
+// Copyright (c) IBM Corporation
+// SPDX-License-Identifier: Apache-2.0
+
 # ============================================================================
 # Example 1: K3S Test Cluster (single node, worker_count <= 1)
 # ============================================================================
