@@ -1,5 +1,5 @@
-// Copyright (c) IBM Corporation
-// SPDX-License-Identifier: Apache-2.0
+# Copyright (c) IBM Corporation
+# SPDX-License-Identifier: Apache-2.0
 
 # K3S Installation Variables
 # Mirrors k3s-install/variables.tf but for the custom provider

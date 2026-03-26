@@ -1,5 +1,5 @@
-// Copyright (c) IBM Corporation
-// SPDX-License-Identifier: Apache-2.0
+# Copyright (c) IBM Corporation
+# SPDX-License-Identifier: Apache-2.0
 
 # GDP Edge Deployment - Example Configuration
 # Copy this file to terraform.tfvars and customize for your environment
@@ -46,18 +46,7 @@ ssh_password    = "your-ssh-password"
 # eks_hostname_type = "public"
 
 # ============================================================================
-# Scenario 4: OpenShift with kubeconfig (requires 'oc login' first)
-# ============================================================================
-
-# edge_name   = "my-edge-cluster"
-# cm_url      = "https://guardium-insights.example.com"
-# oauth_token = "your-oauth-token-here"
-#
-# platform = "openshift"
-# # Ensure you are logged in with: oc login
-
-# ============================================================================
-# Scenario 5: OpenShift with Native OAuth (no 'oc login' required)
+# Scenario 4: OpenShift with Native OAuth (no 'oc login' required)
 # ============================================================================
 # This scenario uses native OAuth authentication - no need to run 'oc login' first.
 # The provider will authenticate directly to OpenShift using the provided credentials.

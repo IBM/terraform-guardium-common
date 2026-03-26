@@ -1,6 +1,3 @@
-// Copyright (c) IBM Corporation
-// SPDX-License-Identifier: Apache-2.0
-
 # Edge Deploy Configuration
 
 This directory contains Terraform configuration for deploying Guardium Data Protection (GDP) Edge components using the `terraform-provider-guardium-data-protection` provider. Supports K3S, AWS EKS, and OpenShift platforms.

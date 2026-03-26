@@ -1,5 +1,5 @@
-// Copyright (c) IBM Corporation
-// SPDX-License-Identifier: Apache-2.0
+# Copyright (c) IBM Corporation
+# SPDX-License-Identifier: Apache-2.0
 
 # Rook-Ceph Installation using Custom Terraform Provider
 # Supports both K3S and OpenShift platforms

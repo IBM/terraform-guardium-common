@@ -1,5 +1,5 @@
-// Copyright (c) IBM Corporation
-// SPDX-License-Identifier: Apache-2.0
+# Copyright (c) IBM Corporation
+# SPDX-License-Identifier: Apache-2.0
 
 # K3S Installation - Example Configuration
 # Copy this file to terraform.tfvars and fill in your values
@@ -55,36 +55,3 @@ ssh_options = {
 # ============================================================================
 install_timeout_minutes = 45  # Maximum time for K3S installation
 
-# ============================================================================
-# Example: Multi-Node Cluster (3 Workers)
-# ============================================================================
-# cluster_name  = "my-multi-node-cluster"
-#
-# master_nodes = [
-#   "my-multi-node-cluster-master1.fyre.ibm.com"
-# ]
-#
-# worker_nodes = [
-#   "my-multi-node-cluster-worker1.fyre.ibm.com",
-#   "my-multi-node-cluster-worker2.fyre.ibm.com",
-#   "my-multi-node-cluster-worker3.fyre.ibm.com"
-# ]
-
-# ============================================================================
-# Example: HA Cluster (3 Masters + 5 Workers)
-# ============================================================================
-# cluster_name  = "my-ha-cluster"
-#
-# master_nodes = [
-#   "my-ha-cluster-master1.fyre.ibm.com",
-#   "my-ha-cluster-master2.fyre.ibm.com",
-#   "my-ha-cluster-master3.fyre.ibm.com"
-# ]
-#
-# worker_nodes = [
-#   "my-ha-cluster-worker1.fyre.ibm.com",
-#   "my-ha-cluster-worker2.fyre.ibm.com",
-#   "my-ha-cluster-worker3.fyre.ibm.com",
-#   "my-ha-cluster-worker4.fyre.ibm.com",
-#   "my-ha-cluster-worker5.fyre.ibm.com"
-# ]

@@ -1,5 +1,5 @@
-// Copyright (c) IBM Corporation
-// SPDX-License-Identifier: Apache-2.0
+# Copyright (c) IBM Corporation
+# SPDX-License-Identifier: Apache-2.0
 
 # K3S Installation with Custom Provider
 # Installs K3S on existing nodes using terraform-provider-k3s
