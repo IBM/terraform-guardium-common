@@ -7,11 +7,8 @@
 terraform {
   required_providers {
     guardium-data-protection = {
-      # For internal testing with IBM Artifactory
-      # source  = "registry.terraform.io/ibm/guardium-data-protection"
-      # For public release (uncomment when published to HashiCorp registry)
-      source  = "hashicorp.com/ibm/guardium-data-protection"
-      version = "~> 1.3.8"
+      source  = "IBM/guardium-data-protection"
+      version = "~> 1.4.0"
     }
   }
 }
@@ -51,7 +48,7 @@ provider "guardium-data-protection" {
 # Deploy Edge
 # ============================================================================
 
-resource "guardium-data-protection_deployment" "edge" {
+resource "guardium-data-protection_edge_deploy" "edge" {
 
   # Bundle source - use either edge_name (download from CM) or bundle_directory (local)
   edge_name        = var.edge_name
