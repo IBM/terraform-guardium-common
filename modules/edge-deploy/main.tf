@@ -48,7 +48,7 @@ provider "guardium-data-protection" {
 # Deploy Edge
 # ============================================================================
 
-resource "guardium-data-protection_deployment" "edge" {
+resource "guardium-data-protection_edge_deploy" "edge" {
 
   # Bundle source - use either edge_name (download from CM) or bundle_directory (local)
   edge_name        = var.edge_name
