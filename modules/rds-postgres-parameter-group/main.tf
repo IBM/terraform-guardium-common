@@ -46,7 +46,7 @@ resource "aws_db_parameter_group" "guardium" {
   parameter {
     name         = "shared_preload_libraries"
     value        = "pgaudit"
-    apply_method = "pending-reboot"
+    apply_method = "immediate"
   }
 
   parameter {
