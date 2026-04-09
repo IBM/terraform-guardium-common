@@ -78,12 +78,3 @@ resource "aws_rds_cluster_parameter_group" "guardium" {
     }
   }
 }
-
-# we need to reboot the cluster here if the parameter group has changed.
-resource "gdp-middleware-helper_aurora_reboot" "postgres_reboot" {
-  depends_on = [aws_rds_cluster_parameter_group.guardium]
-
-  cluster_identifier = var.aurora_postgres_cluster_identifier
-  region = var.aws_region
-  force_failover = var.force_failover
-}

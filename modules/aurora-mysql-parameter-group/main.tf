@@ -92,14 +92,3 @@ resource "gdp-middleware-helper_aurora_modify" "enable_audit_logs" {
   cloudwatch_logs_exports = var.cloudwatch_logs_exports
   apply_immediately       = true
 }
-
-# Use the GDP middleware helper to reboot the cluster
-resource "gdp-middleware-helper_aurora_reboot" "mysql_reboot" {
-  depends_on = [
-    gdp-middleware-helper_aurora_modify.enable_audit_logs,
-  ]
-
-  cluster_identifier = var.aurora_mysql_cluster_identifier
-  region = var.aws_region
-  force_failover = var.force_failover
-}
