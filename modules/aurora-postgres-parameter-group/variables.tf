@@ -36,3 +36,9 @@ variable "parameter_group_family" {
   description = "The family of the Aurora PostgreSQL parameter group"
   default     = "aurora-postgresql14"
 }
+
+variable "force_failover" {
+  type        = bool
+  default     = false
+  description = "To failover the database instance, requires multi AZ databases. Results in minimal downtime"
+}

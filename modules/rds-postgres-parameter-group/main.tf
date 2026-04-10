@@ -46,7 +46,7 @@ resource "aws_db_parameter_group" "guardium" {
   parameter {
     name         = "shared_preload_libraries"
     value        = "pgaudit"
-    apply_method = "immediate"
+    apply_method = "pending-reboot"
   }
 
   parameter {
@@ -67,4 +67,13 @@ resource "aws_db_parameter_group" "guardium" {
       value = parameter.value.value
     }
   }
+}
+
+# we need to reboot the instance here if the parameter group has changed.
+resource "gdp-middleware-helper_rds_reboot" "postgres_reboot" {
+  depends_on = [aws_db_parameter_group.guardium]
+
+  db_instance_identifier = var.postgres_rds_cluster_identifier
+  region                 = var.aws_region
+  force_failover         = var.force_failover
 }

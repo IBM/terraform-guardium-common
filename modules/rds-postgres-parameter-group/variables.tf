@@ -25,3 +25,9 @@ variable "pg_audit_log" {
 variable "pg_audit_role" {
   description = "The parameter group role log value for postgres"
 }
+
+variable "force_failover" {
+  type        = bool
+  description = "Whether to force a failover during RDS reboot"
+  default     = false
+}
