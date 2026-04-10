@@ -24,7 +24,6 @@ variable "force_failover" {
   description = "To failover the database instance, requires multi AZ databases. Results in minimal downtime"
 }
 
-
 variable "pg_audit_log" {
   description = "The parameter group audit log value for postgres"
 }

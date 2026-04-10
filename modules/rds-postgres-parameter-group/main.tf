@@ -74,6 +74,6 @@ resource "gdp-middleware-helper_rds_reboot" "postgres_reboot" {
   depends_on = [aws_db_parameter_group.guardium]
 
   db_instance_identifier = var.postgres_rds_cluster_identifier
-  region = var.aws_region
-  force_failover = var.force_failover
+  region                 = var.aws_region
+  force_failover         = var.force_failover
 }

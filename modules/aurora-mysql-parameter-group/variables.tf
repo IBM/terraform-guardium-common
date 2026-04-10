@@ -24,12 +24,6 @@ variable "aurora_mysql_cluster_identifier" {
   description = "Aurora MySQL cluster identifier to be monitored"
 }
 
-variable "force_failover" {
-  type        = bool
-  default     = false
-  description = "To failover the database cluster, requires multi AZ databases. Results in minimal downtime"
-}
-
 //////
 // Audit Plugin Configuration
 //////
