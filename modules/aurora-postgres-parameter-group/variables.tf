@@ -42,3 +42,9 @@ variable "parameter_group_family" {
   description = "The family of the Aurora PostgreSQL parameter group"
   default     = "aurora-postgresql14"
 }
+
+variable "skip_reboot" {
+  description = "Skip automatic reboot (audit logging won't work until manual reboot)"
+  type        = bool
+  default     = true
+}

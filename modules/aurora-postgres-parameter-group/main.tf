@@ -81,6 +81,8 @@ resource "aws_rds_cluster_parameter_group" "guardium" {
 
 # We need to reboot the cluster here if the parameter group has changed.
 resource "gdp-middleware-helper_aurora_reboot" "postgres_reboot" {
+  count = var.skip_reboot ? 0 : 1
+
   depends_on = [aws_rds_cluster_parameter_group.guardium]
 
   cluster_identifier = var.aurora_postgres_cluster_identifier

@@ -31,3 +31,9 @@ variable "pg_audit_log" {
 variable "pg_audit_role" {
   description = "The parameter group role log value for postgres"
 }
+
+variable "skip_reboot" {
+  description = "Skip automatic reboot (audit logging won't work until manual reboot)"
+  type        = bool
+  default     = true
+}
