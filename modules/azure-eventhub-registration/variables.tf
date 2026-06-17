@@ -9,7 +9,7 @@
 
 variable "azure_region" {
   type        = string
-  description = "Azure region where the Cosmos DB account is located"
+  description = "Azure region where the resource is located"
 }
 
 variable "azure_subscription_id" {
@@ -21,15 +21,26 @@ variable "azure_subscription_id" {
 // General variables
 //////
 
+variable "profile_definition_name" {
+  type        = string
+  description = "Profile definition name for the Universal Connector (e.g., 'Azure Cosmos over Event Hub', 'Azure MySQL over Event Hub')"
+}
+
 variable "udc_name" {
   type        = string
   description = "Name for universal connector. Is used for all Azure objects"
-  default     = "azure-cosmos-gdp"
+}
+
+variable "description" {
+  type        = string
+  description = "Description for the Universal Connector profile"
+  default     = ""
 }
 
 variable "gdp_client_secret" {
   type        = string
   description = "Client secret from output of grdapi register_oauth_client"
+  sensitive   = true
 }
 
 variable "gdp_client_id" {
@@ -81,7 +92,7 @@ variable "csv_start_position" {
 }
 
 //////
-// Azure Cosmos Event Hub Configuration
+// Azure Event Hub Configuration
 //////
 
 variable "config_mode" {
@@ -93,6 +104,7 @@ variable "config_mode" {
 variable "event_hub_connections" {
   type        = string
   description = "Event Hub connection string"
+  sensitive   = true
 }
 
 variable "threads" {
@@ -116,4 +128,5 @@ variable "consumer_group" {
 variable "storage_connection" {
   type        = string
   description = "Azure Storage connection string for Event Hub checkpointing"
+  sensitive   = true
 }

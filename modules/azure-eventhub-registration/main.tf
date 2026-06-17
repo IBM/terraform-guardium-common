@@ -9,16 +9,17 @@ locals {
   udc_name_safe = trimspace(replace(local.udc_name, "/", "-"))
 
   # Generate the CSV content from the template
-  udc_csv = templatefile("${path.module}/templates/azureCosmosEventHub.tpl", {
-    udc_name              = local.udc_name_safe
-    description           = "GDP Azure Cosmos DB connector for ${var.udc_name}"
-    config_mode           = var.config_mode
-    event_hub_connections = var.event_hub_connections
-    initial_position      = var.csv_start_position
-    threads               = var.threads
-    decorate_events       = var.decorate_events
-    consumer_group        = var.consumer_group
-    storage_connection    = var.storage_connection
+  udc_csv = templatefile("${path.module}/templates/azureEventHub.tpl", {
+    profile_definition_name = var.profile_definition_name
+    udc_name                = local.udc_name_safe
+    description             = var.description
+    config_mode             = var.config_mode
+    event_hub_connections   = var.event_hub_connections
+    initial_position        = var.csv_start_position
+    threads                 = var.threads
+    decorate_events         = var.decorate_events
+    consumer_group          = var.consumer_group
+    storage_connection      = var.storage_connection
   })
 }
 
