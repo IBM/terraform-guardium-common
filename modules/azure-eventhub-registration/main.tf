@@ -5,7 +5,7 @@
 
 locals {
   # Create a sanitized version of the UDC name for file paths
-  udc_name      = format("%s-%s-%s", var.azure_region, var.udc_name, var.azure_subscription_id)
+  udc_name      = format("%s-%s", var.udc_name, var.azure_subscription_id)
   udc_name_safe = trimspace(replace(local.udc_name, "/", "-"))
 
   # Generate the CSV content from the template
