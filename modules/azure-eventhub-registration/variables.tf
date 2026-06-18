@@ -17,6 +17,11 @@ variable "azure_subscription_id" {
   description = "Azure subscription ID, used to generate the universal connector name"
 }
 
+variable "azure_enrollment_id" {
+  type        = string
+  description = "Azure Enrollment ID (required)"
+}
+
 //////
 // General variables
 //////

@@ -20,6 +20,7 @@ locals {
     decorate_events         = var.decorate_events
     consumer_group          = var.consumer_group
     storage_connection      = var.storage_connection
+    enrollment_id           = var.azure_enrollment_id
   })
 }
 

@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-output "mysql_server_fqdn" {
+output "mysql_server_endpoint" {
   description = "Fully qualified domain name of the MySQL server"
   value       = data.azurerm_mysql_flexible_server.mysql.fqdn
 }
