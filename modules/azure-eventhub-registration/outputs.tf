@@ -4,8 +4,8 @@
 #
 
 output "profile_csv" {
-  description = "Universal Connector profile CSV content"
-  value       = var.enable_universal_connector ? module.universal_connector[0].profile_csv : "Universal connector disabled"
+  description = "Universal Connector profile CSV"
+  value       = var.enable_universal_connector ? module.universal_connector[0].profile_csv : ""
 }
 
 output "udc_name" {
