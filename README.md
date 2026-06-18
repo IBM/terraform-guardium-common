@@ -23,8 +23,6 @@ These modules are designed to be used as dependencies by other Guardium Terrafor
 - AWS Secrets Manager configuration
 - RDS parameter group management for PostgreSQL and MariaDB
 - Database registration with Guardium Universal Connector
-- Azure Event Hub integration for audit logging
-- Azure diagnostic settings for MySQL and other datastores
 
 ## Guardium Data Protection Version Compatibility
 
@@ -264,49 +262,10 @@ Registers MariaDB and MySQL RDS instances with Guardium via CloudWatch.
 - `cloudwatch_endpoint` - Custom endpoint URL for AWS CloudWatch (default: "")
 - `use_aws_bundled_ca` - Whether to use the AWS bundled CA certificates (default: true)
 
-### azure-mysql-diagnostic-settings
-Configures Azure MySQL diagnostic settings to stream audit logs to Event Hub.
-
-**Inputs:**
-- `mysql_server_name` (required) - Azure MySQL server name
-- `resource_group_name` (required) - Azure resource group name
-- `eventhub_namespace_name` (required) - Event Hub namespace name
-- `eventhub_name` (required) - Event Hub name
-- `storage_account_name` (required) - Storage account for checkpointing
-- `eventhub_authorization_rule_name` (required) - Event Hub authorization rule name
-- `diagnostic_setting_name` - Name for diagnostic setting (default: "guardium-mysql-audit")
-- `enable_mysql_audit_logs` - Enable MySQL audit logs (default: true)
-- `enable_slow_query_logs` - Enable slow query logs (default: false)
-
-**Outputs:**
-- `diagnostic_setting_id` - ID of the diagnostic setting
-
-### azure-eventhub-registration
-Registers Azure datastores with Guardium Universal Connector via Event Hub.
-
-**Inputs:**
-- `profile_definition_name` (required) - Profile definition name (e.g., "Azure MySQL over Event Hub")
-- `udc_name` (required) - Universal connector name
-- `description` (required) - Connector description
-- `azure_subscription_id` (required) - Azure subscription ID
-- `event_hub_connections` (required) - Event Hub connection string
-- `storage_connection` (required) - Storage account connection string
-- `consumer_group` - Event Hub consumer group (default: "$Default")
-- `gdp_client_id` (required) - Guardium client ID
-- `gdp_client_secret` (required) - Guardium client secret
-- `gdp_server` (required) - Guardium server hostname/IP
-- `gdp_port` - Guardium port (default: "8443")
-- `gdp_username` (required) - Guardium username
-- `gdp_password` (required) - Guardium password
-- `gdp_mu_host` (required) - Comma-separated list of Guardium Managed Units
-- `enable_universal_connector` - Enable connector deployment (default: true)
-- `csv_start_position` - Start position for reading logs (default: "end")
-
 ## Prerequisites
 
 - Terraform v1.9.8 or later
-- AWS CLI configured with appropriate credentials (for AWS modules)
-- Azure CLI configured with appropriate credentials (for Azure modules)
+- AWS CLI configured with appropriate credentials
 - Access to IBM Guardium Data Protection instance (version 12.2.1 or above)
 - AWS permissions for:
   - CloudWatch Logs
@@ -314,11 +273,6 @@ Registers Azure datastores with Guardium Universal Connector via Event Hub.
   - RDS
   - IAM
   - Secrets Manager
-- Azure permissions for:
-  - Event Hub
-  - Diagnostic Settings
-  - Storage Accounts
-  - MySQL/Cosmos DB resources
 
 ## Contributing
 
