@@ -29,7 +29,6 @@ variable "force_failover" {
   description = "To failover the database cluster, requires multi AZ databases. Results in minimal downtime"
 }
 
-
 variable "pg_audit_log" {
   description = "The parameter group audit log value for postgres"
 }
@@ -42,4 +41,10 @@ variable "parameter_group_family" {
   type        = string
   description = "The family of the Aurora PostgreSQL parameter group"
   default     = "aurora-postgresql14"
+}
+
+variable "skip_reboot" {
+  description = "Skip automatic reboot (audit logging won't work until manual reboot)"
+  type        = bool
+  default     = true
 }

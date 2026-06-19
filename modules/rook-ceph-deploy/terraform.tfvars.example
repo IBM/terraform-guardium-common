@@ -1,0 +1,42 @@
+# Copyright (c) IBM Corporation
+# SPDX-License-Identifier: Apache-2.0
+
+# ============================================================================
+# Example 1: K3S Cluster (single node, worker_count <= 1)
+# ============================================================================
+
+# cluster_name    = "my-k3s-test"
+# platform        = "k3s"
+# target_node     = "k3s-master.example.com"
+# worker_count    = 0
+# ssh_user        = "root"
+# ssh_password    = "your-password"
+# rook_ceph_version = "v1.15.4"
+# rook_ceph_installation_path = "path"
+# rook_ceph_airgap_install = true
+
+
+# ============================================================================
+# Example 2: OpenShift Cluster
+# ============================================================================
+
+# cluster_name    = "my-ocp-cluster"
+# platform        = "openshift"
+# target_node     = "ocp-api-node.example.com"
+# ssh_user        = "root"
+# ssh_password    = "your-password"
+# rook_ceph_version = "v1.15.4"
+# pod_wait_timeout  = "600s"
+# sleep_between_steps = 60
+# rook_ceph_installation_path = "path"
+# rook_ceph_airgap_install = true
+
+# ============================================================================
+# SSH Options (optional)
+# ============================================================================
+
+# ssh_options = {
+#   connect_timeout       = 30
+#   server_alive_interval = 60
+#   server_alive_count    = 5
+# }
