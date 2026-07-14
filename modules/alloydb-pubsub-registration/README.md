@@ -122,5 +122,5 @@ This module uses the `connect-datasource-to-uc` module from the Guardium GDP pro
 
 ## License
 
-Copyright IBM Corp. 2025
+Copyright IBM Corp. 2026
 SPDX-License-Identifier: Apache-2.0
