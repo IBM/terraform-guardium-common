@@ -1,0 +1,2 @@
+profile_definition_name,name,description,credential_name,project_id,topic_name,sub_name,max_messages
+GCP AlloyDB Over PubSub,${udc_name},${description},${credential_name},${gcp_project_id},${topic_name},${sub_name},${max_messages}
