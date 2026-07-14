@@ -9,7 +9,7 @@
 
 variable "azure_region" {
   type        = string
-  description = "Azure region where the Cosmos DB account is located"
+  description = "Azure region where the SQL Server is located"
 }
 
 variable "azure_subscription_id" {
@@ -24,12 +24,13 @@ variable "azure_subscription_id" {
 variable "udc_name" {
   type        = string
   description = "Name for universal connector. Is used for all Azure objects"
-  default     = "azure-cosmos-gdp"
+  default     = "azure-sql-gdp"
 }
 
 variable "gdp_client_secret" {
   type        = string
   description = "Client secret from output of grdapi register_oauth_client"
+  sensitive   = true
 }
 
 variable "gdp_client_id" {
@@ -74,46 +75,62 @@ variable "enable_universal_connector" {
   default     = true
 }
 
-variable "csv_start_position" {
-  type        = string
-  description = "Start position for UDC (beginning, end)"
-  default     = "end"
-}
-
 //////
-// Azure Cosmos Event Hub Configuration
+// Azure SQL JDBC Configuration
 //////
 
-variable "config_mode" {
+variable "jdbc_connection_string" {
   type        = string
-  description = "Configuration mode for Event Hub input (basic or advanced)"
-  default     = "basic"
+  description = "JDBC connection string for Azure SQL Database"
 }
 
-variable "event_hub_connections" {
+variable "credential_name" {
   type        = string
-  description = "Event Hub connection string"
+  description = "Name of the JDBC credential configured in Guardium CM"
+  default     = "azure-sql-jdbc-cred"
 }
 
-variable "threads" {
-  type        = number
-  description = "Number of threads for Event Hub consumer"
-  default     = 8
-}
-
-variable "decorate_events" {
-  type        = bool
-  description = "Whether to decorate events with Event Hub metadata"
-  default     = true
-}
-
-variable "consumer_group" {
+variable "jdbc_driver_library" {
   type        = string
-  description = "Event Hub consumer group name"
-  default     = "$Default"
+  description = "Name of the JDBC driver JAR file uploaded to Guardium CM"
+  default     = "mssql-jdbc-7.4.1.jre8.jar"
 }
 
-variable "storage_connection" {
+variable "statement_select" {
   type        = string
-  description = "Azure Storage connection string for Event Hub checkpointing"
+  description = "SELECT clause for the SQL query"
+}
+
+variable "statement_from" {
+  type        = string
+  description = "FROM clause for the SQL query (sys.fn_get_audit_file)"
+}
+
+variable "statement_where" {
+  type        = string
+  description = "WHERE clause for the SQL query with filters"
+}
+
+variable "schedule" {
+  type        = string
+  description = "Cron schedule for JDBC polling (e.g., '*/1 * * * *' for every minute)"
+  default     = "*/1 * * * *"
+}
+
+variable "tracking_column" {
+  type        = string
+  description = "Column name to track for incremental reads"
+  default     = "updatedeventtime"
+}
+
+variable "tracking_column_type" {
+  type        = string
+  description = "Data type of the tracking column"
+  default     = "numeric"
+}
+
+variable "enrollment_id" {
+  type        = string
+  description = "Azure enrollment ID for the account"
+  default     = "123456789"
 }

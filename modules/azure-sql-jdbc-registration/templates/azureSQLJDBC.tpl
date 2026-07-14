@@ -1,0 +1,2 @@
+profile_definition_name,name,description,credential_name,enrollmentId,jdbc_connection_string,jdbc_driver_library,statement_select,statement_from,statement_where,tracking_column_type,tracking_column,schedule
+Azure SQL Over JDBC,${udc_name},${description},${credential_name},${enrollment_id},${jdbc_connection_string},${jdbc_driver_library},"${statement_select}","${statement_from}","${statement_where}",${tracking_column_type},${tracking_column},${schedule}
