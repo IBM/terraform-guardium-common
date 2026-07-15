@@ -4,9 +4,8 @@
 #
 
 locals {
-  # Create a sanitized version of the UDC name for file paths
-  udc_name      = format("%s-%s", var.udc_name, var.azure_subscription_id)
-  udc_name_safe = trimspace(replace(local.udc_name, "/", "-"))
+  # Use udc_name exactly as passed — the caller is responsible for building the full name
+  udc_name_safe = trimspace(replace(var.udc_name, "/", "-"))
 
   # Template args shared by both UC versions
   # UC 1.0 template args
