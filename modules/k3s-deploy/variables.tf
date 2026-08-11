@@ -81,6 +81,7 @@ variable "ssh_options" {
     connect_timeout       = number
     server_alive_interval = number
     server_alive_count    = number
+    known_hosts_file      = optional(string, "")
   })
   default = {
     connect_timeout       = 30

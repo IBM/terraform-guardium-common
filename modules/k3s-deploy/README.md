@@ -123,6 +123,7 @@ ssh_options = {
   connect_timeout       = 30  # SSH connection timeout in seconds
   server_alive_interval = 10  # Interval for keepalive messages
   server_alive_count    = 3   # Number of keepalive messages before disconnect
+  known_hosts_file      = ""  # Optional: path to known_hosts file to verify node SSH host keys
 }
 ```
 

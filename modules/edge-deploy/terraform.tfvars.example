@@ -18,6 +18,7 @@ k3s_nodes       = []  # Empty to auto-detect from kubectl
 ssh_user        = "root"
 ssh_password    = "your-ssh-password"
 # ssh_key_path  = "/path/to/ssh/private/key"  # Use either password OR key
+# ssh_known_hosts_file = "/path/to/known_hosts"  # Verify node SSH host keys; unset disables verification
 
 # ============================================================================
 # Scenario 2: K3S with Local Bundle
