@@ -1,0 +1,2 @@
+profile_definition_name,name,description,credential_name,config_mode,event_hub_connections,initial_position,threads,decorate_events,consumer_group,enrollment_id,storage_connection
+Azure Databricks Over Event Hub,${udc_name},${description},${credential_name},${config_mode},"${event_hub_connections}",${initial_position},${threads},${decorate_events},${consumer_group},${enrollment_id},"${storage_connection}"

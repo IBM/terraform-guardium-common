@@ -1,5 +1,5 @@
 #
-# Copyright IBM Corp. 2025
+# Copyright IBM Corp. 2026
 # SPDX-License-Identifier: Apache-2.0
 #
 
@@ -9,7 +9,7 @@
 
 variable "azure_region" {
   type        = string
-  description = "Azure region where the Cosmos DB account is located"
+  description = "Azure region where the resource is located"
 }
 
 variable "azure_subscription_id" {
@@ -17,19 +17,41 @@ variable "azure_subscription_id" {
   description = "Azure subscription ID, used to generate the universal connector name"
 }
 
+variable "azure_enrollment_id" {
+  type        = string
+  description = "Azure Enrollment ID (required)"
+}
+
 //////
 // General variables
 //////
 
+variable "uc_version" {
+  type        = string
+  description = "Databricks UC version: 'uc1' uses the 'Azure Databricks Over Event Hub' plugin, 'uc2' uses 'Azure Databricks Over Event Hub Connect 2.0'"
+  default     = "uc1"
+
+  validation {
+    condition     = contains(["uc1", "uc2"], var.uc_version)
+    error_message = "uc_version must be either 'uc1' or 'uc2'."
+  }
+}
+
 variable "udc_name" {
   type        = string
-  description = "Name for universal connector. Is used for all Azure objects"
-  default     = "azure-cosmos-gdp"
+  description = "Name for the universal connector. Used to uniquely identify the UC profile in Guardium"
+}
+
+variable "description" {
+  type        = string
+  description = "Description for the Universal Connector profile"
+  default     = ""
 }
 
 variable "gdp_client_secret" {
   type        = string
   description = "Client secret from output of grdapi register_oauth_client"
+  sensitive   = true
 }
 
 variable "gdp_client_id" {
@@ -81,7 +103,7 @@ variable "csv_start_position" {
 }
 
 //////
-// Azure Cosmos Event Hub Configuration
+// Azure Event Hub Configuration
 //////
 
 variable "config_mode" {
@@ -92,7 +114,8 @@ variable "config_mode" {
 
 variable "event_hub_connections" {
   type        = string
-  description = "Event Hub connection string"
+  description = "Event Hub connection string (Endpoint=sb://...)"
+  sensitive   = true
 }
 
 variable "threads" {
@@ -116,4 +139,47 @@ variable "consumer_group" {
 variable "storage_connection" {
   type        = string
   description = "Azure Storage connection string for Event Hub checkpointing"
+  sensitive   = true
+}
+
+variable "cluster_name" {
+  type        = string
+  description = "Guardium cluster name (UC 2.0 only)"
+  default     = ""
+}
+
+variable "udc_credential" {
+  type        = string
+  description = "Name of the credential configured in Guardium CM for this Universal Connector"
+  default     = ""
+}
+
+variable "mu_count" {
+  type        = number
+  description = "Number of Managed Units to deploy the profile to (UC 2.0)"
+  default     = 2
+}
+
+variable "use_elb" {
+  type        = bool
+  description = "Whether to use ELB (UC 2.0)"
+  default     = false
+}
+
+variable "eventhub_partition_count" {
+  type        = number
+  description = "Number of Event Hub partitions (UC 2.0)"
+  default     = 4
+}
+
+variable "start_time" {
+  type        = number
+  description = "Start time as epoch in milliseconds (UC 2.0, 0 = disabled)"
+  default     = 0
+}
+
+variable "nodata_threshold_min" {
+  type        = number
+  description = "No data threshold in minutes (UC 2.0)"
+  default     = 60
 }

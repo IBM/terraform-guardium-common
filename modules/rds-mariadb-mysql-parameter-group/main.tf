@@ -84,7 +84,7 @@ resource "aws_db_parameter_group" "db_param_group" {
   parameter {
     name  = "log_output"
     value = "FILE"
-    apply_method = "pending-reboot"
+    apply_method = "immediate"
   }
 
   lifecycle {
@@ -169,15 +169,4 @@ resource "gdp-middleware-helper_rds_modify" "enable_audit_logs" {
   option_group_name        = aws_db_option_group.audit.name
   cloudwatch_logs_exports  = var.cloudwatch_logs_exports
   apply_immediately        = true
-}
-
-# Use the GDP middleware helper to reboot the instance
-resource "gdp-middleware-helper_rds_reboot" "db_reboot" {
-  depends_on = [
-    gdp-middleware-helper_rds_modify.enable_audit_logs,
-  ]
-
-  db_instance_identifier = var.rds_cluster_identifier
-  region = var.aws_region
-  force_failover = var.force_failover
 }

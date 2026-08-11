@@ -1,0 +1,2 @@
+profile_definition_name,name,description,credential_name,cluster_name,mu_count,use_elb,eventhub_consumer_group,storage_connection_string,enrollment_id,eventhub_partition_count,start_time,nodata_threshold_min
+Azure Databricks Over Event Hub Connect 2.0,${udc_name},${description},${credential_name},${cluster_name},${mu_count},${use_elb},${consumer_group},"${storage_connection}",${enrollment_id},${eventhub_partition_count},${start_time},${nodata_threshold_min}
