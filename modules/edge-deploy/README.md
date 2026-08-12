@@ -44,6 +44,7 @@ k3s_master_node = "master.example.com"
 k3s_nodes       = []  # Empty to auto-detect from kubectl
 ssh_user        = "root"
 ssh_password    = "your-ssh-password"
+# ssh_known_hosts_file = "/path/to/known_hosts"  # Optional: verify node SSH host keys
 ```
 
 ### Scenario 2: K3S with Local Bundle
@@ -129,6 +130,15 @@ cleanup_bundle = true  # Cleanup downloaded bundle directory on destroy
 # Set to true when using an external image registry (e.g. Docker Hub, Quay)
 # instead of the CM private registry. Skips registry certificate installation.
 external_image_registry = false
+```
+
+### Optional: SSH Host Key Verification
+
+By default, SSH connections to K3S/EKS nodes do not verify the remote host key. To enable
+verification, point `ssh_known_hosts_file` at a `known_hosts` file:
+
+```hcl
+ssh_known_hosts_file = "/path/to/known_hosts"
 ```
 
 ## Outputs

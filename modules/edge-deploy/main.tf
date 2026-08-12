@@ -23,9 +23,10 @@ provider "guardium-data-protection" {
   platform    = var.platform
 
   # SSH (K3S / OpenShift)
-  ssh_user     = var.ssh_user
-  ssh_password = var.ssh_password
-  ssh_key_path = var.ssh_key_path
+  ssh_user             = var.ssh_user
+  ssh_password         = var.ssh_password
+  ssh_key_path         = var.ssh_key_path
+  ssh_known_hosts_file = var.ssh_known_hosts_file
 
   # AWS EKS (only needed for eks platform)
   aws_region        = var.aws_region
@@ -51,7 +52,7 @@ provider "guardium-data-protection" {
 resource "guardium-data-protection_edge_deploy" "edge" {
 
   # Bundle source - use either edge_name (download from CM) or bundle_directory (local)
-  edge_name        = var.edge_name
+  edge_name             = var.edge_name
   edge_bundle_directory = var.edge_bundle_directory
 
   # Platform (overrides provider-level if set)

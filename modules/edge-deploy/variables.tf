@@ -69,6 +69,12 @@ variable "ssh_key_path" {
   default     = ""
 }
 
+variable "ssh_known_hosts_file" {
+  description = "Path to a known_hosts file used to verify K3S/EKS node SSH host keys. If unset, host key verification is disabled (can also be set via GDP_SSH_KNOWN_HOSTS_FILE env var)."
+  type        = string
+  default     = ""
+}
+
 # ============================================================================
 # K3S Platform Configuration
 # ============================================================================

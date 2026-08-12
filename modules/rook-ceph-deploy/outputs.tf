@@ -47,7 +47,7 @@ output "rook_ceph_version" {
 
 output "cluster_summary" {
   description = "Summary of the Rook-Ceph installation"
-  value = <<-EOT
+  value       = <<-EOT
     Rook-Ceph Installation Summary:
       Cluster:        ${guardium-data-protection_rook_ceph_cluster.this.cluster_name}
       Platform:       ${guardium-data-protection_rook_ceph_cluster.this.platform}

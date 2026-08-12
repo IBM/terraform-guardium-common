@@ -39,4 +39,5 @@
 #   connect_timeout       = 30
 #   server_alive_interval = 60
 #   server_alive_count    = 5
+#   known_hosts_file      = "/path/to/known_hosts"  # Verify node SSH host keys; unset disables verification
 # }

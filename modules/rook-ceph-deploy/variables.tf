@@ -47,8 +47,8 @@ variable "rook_ceph_version" {
 }
 
 variable "rook_ceph_installation_path" {
-    description = "Rook-Ceph installation local directory"
-    type = string
+  description = "Rook-Ceph installation local directory"
+  type        = string
 }
 
 variable "rook_ceph_airgap_install" {
@@ -87,9 +87,10 @@ variable "ssh_password" {
 variable "ssh_options" {
   description = "SSH connection options"
   type = object({
-    connect_timeout      = optional(number, 30)
+    connect_timeout       = optional(number, 30)
     server_alive_interval = optional(number, 10)
-    server_alive_count   = optional(number, 3)
+    server_alive_count    = optional(number, 3)
+    known_hosts_file      = optional(string, "")
   })
   default = {}
 }

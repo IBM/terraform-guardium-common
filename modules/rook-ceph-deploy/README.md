@@ -89,6 +89,7 @@ ssh_options = {
   connect_timeout       = 30
   server_alive_interval = 60
   server_alive_count    = 5
+  known_hosts_file      = ""  # Optional: path to known_hosts file to verify node SSH host keys
 }
 ```
 
