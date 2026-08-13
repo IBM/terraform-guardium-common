@@ -32,6 +32,12 @@ variable "oauth_token" {
   sensitive   = true
 }
 
+variable "cm_cert_path" {
+  description = "Path to a PEM-encoded certificate used to verify the Central Manager's TLS certificate. If unset, TLS certificate verification is disabled."
+  type        = string
+  default     = ""
+}
+
 # ============================================================================
 # Platform Configuration
 # ============================================================================
