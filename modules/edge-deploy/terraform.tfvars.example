@@ -11,6 +11,7 @@
 edge_name   = "my-edge-cluster"
 cm_url      = "https://guardium-insights.example.com"
 oauth_token = "your-oauth-token-here"
+# cm_cert_path = "/path/to/cm-cert.pem"  # Optional: verify CM's TLS certificate. If unset, verification is disabled.
 
 platform        = "k3s"
 k3s_master_node = "master.example.com"
@@ -37,6 +38,7 @@ ssh_password    = "your-ssh-password"
 # edge_name   = "my-edge-cluster"
 # cm_url      = "https://guardium-insights.example.com"
 # oauth_token = "your-oauth-token-here"
+# cm_cert_path = "/path/to/cm-cert.pem"
 #
 # platform         = "eks"
 # eks_cluster_name = "my-eks-cluster"
@@ -55,6 +57,7 @@ ssh_password    = "your-ssh-password"
 # edge_name   = "my-edge-cluster"
 # cm_url      = "https://guardium-insights.example.com"
 # oauth_token = "your-oauth-token-here"
+# cm_cert_path = "/path/to/cm-cert.pem"
 #
 # platform = "openshift"
 #

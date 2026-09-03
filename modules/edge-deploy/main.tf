@@ -18,9 +18,10 @@ terraform {
 # ============================================================================
 
 provider "guardium-data-protection" {
-  cm_url      = var.cm_url
-  oauth_token = var.oauth_token
-  platform    = var.platform
+  cm_url       = var.cm_url
+  oauth_token  = var.oauth_token
+  cm_cert_path = var.cm_cert_path
+  platform     = var.platform
 
   # SSH (K3S / OpenShift)
   ssh_user             = var.ssh_user
