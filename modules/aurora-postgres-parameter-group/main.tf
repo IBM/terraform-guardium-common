@@ -9,7 +9,7 @@ data "aws_rds_cluster" "cluster_metadata" {
 
 data "gdp-middleware-helper_aurora_postgres_parameter_group" "parameter_group" {
   cluster_identifier = var.aurora_postgres_cluster_identifier
-  region = var.aws_region
+  region             = var.aws_region
 }
 
 locals {
@@ -17,14 +17,14 @@ locals {
 }
 
 locals {
-  family_name = lower(data.gdp-middleware-helper_aurora_postgres_parameter_group.parameter_group.family_name)
+  family_name     = lower(data.gdp-middleware-helper_aurora_postgres_parameter_group.parameter_group.family_name)
   default_pg_name = format("default.%s", local.family_name)
   is_default_pg = contains(
     [local.cluster_parameter_group_name],
     local.default_pg_name
   )
   parameter_group_name = local.is_default_pg ? format("guardium-aurora-postgres-param-group-%s", var.aurora_postgres_cluster_identifier) : local.cluster_parameter_group_name
-  description = local.is_default_pg ? format("Custom parameter group for enabling audit for %s", var.aurora_postgres_cluster_identifier) : data.gdp-middleware-helper_aurora_postgres_parameter_group.parameter_group.description
+  description          = local.is_default_pg ? format("Custom parameter group for enabling audit for %s", var.aurora_postgres_cluster_identifier) : data.gdp-middleware-helper_aurora_postgres_parameter_group.parameter_group.description
 }
 
 resource "aws_rds_cluster_parameter_group" "guardium" {
@@ -79,13 +79,14 @@ resource "aws_rds_cluster_parameter_group" "guardium" {
   }
 }
 
-# We need to reboot the cluster here if the parameter group has changed.
-resource "gdp-middleware-helper_aurora_reboot" "postgres_reboot" {
-  count = var.skip_reboot ? 0 : 1
+# Use the GDP middleware helper to modify the cluster and apply the parameter group
+resource "gdp-middleware-helper_aurora_modify" "enable_audit_logs" {
+  depends_on = [
+    aws_rds_cluster_parameter_group.guardium,
+  ]
 
-  depends_on = [aws_rds_cluster_parameter_group.guardium]
-
-  cluster_identifier = var.aurora_postgres_cluster_identifier
-  region             = var.aws_region
-  force_failover     = var.force_failover
+  cluster_identifier   = var.aurora_postgres_cluster_identifier
+  region               = var.aws_region
+  parameter_group_name = aws_rds_cluster_parameter_group.guardium.name
+  apply_immediately    = true
 }
