@@ -25,7 +25,7 @@ variable "aurora_postgres_cluster_identifier" {
 
 variable "force_failover" {
   type        = bool
-  default = false
+  default     = false
   description = "To failover the database cluster, requires multi AZ databases. Results in minimal downtime"
 }
 
