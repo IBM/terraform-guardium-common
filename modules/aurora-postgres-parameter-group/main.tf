@@ -85,8 +85,9 @@ resource "gdp-middleware-helper_aurora_modify" "enable_audit_logs" {
     aws_rds_cluster_parameter_group.guardium,
   ]
 
-  cluster_identifier   = var.aurora_postgres_cluster_identifier
-  region               = var.aws_region
-  parameter_group_name = aws_rds_cluster_parameter_group.guardium.name
-  apply_immediately    = true
+  cluster_identifier      = var.aurora_postgres_cluster_identifier
+  region                  = var.aws_region
+  parameter_group_name    = aws_rds_cluster_parameter_group.guardium.name
+  cloudwatch_logs_exports = var.cloudwatch_logs_exports
+  apply_immediately       = true
 }
