@@ -5,7 +5,7 @@
 
 locals {
   # Create a sanitized version of the UDC name for file paths
-  udc_name = format("%s-%s-%s", var.aws_region, var.log_group, var.aws_account_id)
+  udc_name      = format("%s-%s-%s", var.aws_region, var.log_group, var.aws_account_id)
   udc_name_safe = replace(local.udc_name, "/", "-")
 
   # Generate the CSV content from the template
@@ -26,26 +26,26 @@ locals {
 }
 
 module "cloudwatch_to_sqs" {
-  source = "../aws-cloudwatch-to-sqs"
-  datastore_type     = "aurora_postgres"
-  name_prefix        = var.aurora_postgres_cluster_identifier
-  lambda_zip_file    = "${path.module}/files/aurora-postgres-lambda-function.zip"
-  log_group          = var.log_group
-  handler            = "lambda_function.lambda_handler"
+  source          = "../aws-cloudwatch-to-sqs"
+  datastore_type  = "aurora_postgres"
+  name_prefix     = var.aurora_postgres_cluster_identifier
+  lambda_zip_file = "${path.module}/files/aurora-postgres-lambda-function.zip"
+  log_group       = var.log_group
+  handler         = "lambda_function.lambda_handler"
 }
 
 module "universal_connector" {
-  source = "IBM/gdp/guardium//modules/connect-datasource-to-uc"
+  source  = "IBM/gdp/guardium//modules/connect-datasource-to-uc"
   version = "= 1.3.4"
-  count  = var.enable_universal_connector ? 1 : 0  # Skip creation when disabled
+  count   = var.enable_universal_connector ? 1 : 0 # Skip creation when disabled
 
-  udc_name                 = local.udc_name_safe
-  udc_csv_parsed           = local.udc_csv
-  client_id                = var.gdp_client_id
-  client_secret            = var.gdp_client_secret
-  gdp_server               = var.gdp_server
-  gdp_port                 = var.gdp_port
-  gdp_username             = var.gdp_username
-  gdp_password             = var.gdp_password
-  gdp_mu_host              = var.gdp_mu_host
+  udc_name       = local.udc_name_safe
+  udc_csv_parsed = local.udc_csv
+  client_id      = var.gdp_client_id
+  client_secret  = var.gdp_client_secret
+  gdp_server     = var.gdp_server
+  gdp_port       = var.gdp_port
+  gdp_username   = var.gdp_username
+  gdp_password   = var.gdp_password
+  gdp_mu_host    = var.gdp_mu_host
 }

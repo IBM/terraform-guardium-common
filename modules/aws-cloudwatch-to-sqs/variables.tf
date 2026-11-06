@@ -10,29 +10,29 @@ variable "tags" {
 }
 
 variable "lambda_source_file" {
-    type = string
-    description = "The code to be used for the lambda function (deprecated, use lambda_zip_file)"
-    default = null
+  type        = string
+  description = "The code to be used for the lambda function (deprecated, use lambda_zip_file)"
+  default     = null
 }
 
 variable "lambda_zip_file" {
-    type = string
-    description = "Path to pre-built lambda zip file"
-    default = null
+  type        = string
+  description = "Path to pre-built lambda zip file"
+  default     = null
 }
 
 variable "datastore_type" {
-    type = string
-    description = "This will be placed as a suffix when creating SQS objects to avoid collisions"
+  type        = string
+  description = "This will be placed as a suffix when creating SQS objects to avoid collisions"
 }
 
 variable "log_group" {
-  type = string
+  type        = string
   description = "The name of the cloudwatch log group"
 }
 
 variable "handler" {
-  type = string
+  type        = string
   description = "The name of the handler. This should be in the pattern of filename.function_name"
 }
 

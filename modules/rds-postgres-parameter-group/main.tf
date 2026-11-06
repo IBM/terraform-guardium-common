@@ -3,8 +3,8 @@ data "aws_db_instance" "cluster_metadata" {
 }
 
 data "gdp-middleware-helper_rds_postgres_parameter_group" "paramater_group" {
-  db_identifier =  var.postgres_rds_cluster_identifier
-  region = var.aws_region
+  db_identifier = var.postgres_rds_cluster_identifier
+  region        = var.aws_region
 }
 
 locals {
@@ -12,14 +12,14 @@ locals {
 }
 
 locals {
-  family_name = lower(data.gdp-middleware-helper_rds_postgres_parameter_group.paramater_group.family_name)
+  family_name     = lower(data.gdp-middleware-helper_rds_postgres_parameter_group.paramater_group.family_name)
   default_pg_name = format("default.%s", local.family_name)
-  is_default_pg   = contains(
+  is_default_pg = contains(
     [local.instance_parameter_group_name],
     local.default_pg_name
   )
   parameter_group_name = local.is_default_pg ? format("guardium-postgres-param-group-%s", var.postgres_rds_cluster_identifier) : local.instance_parameter_group_name
-  description = local.is_default_pg ? format("Custom parameter group for enabling about for %s", var.postgres_rds_cluster_identifier) : data.gdp-middleware-helper_rds_postgres_parameter_group.paramater_group.description
+  description          = local.is_default_pg ? format("Custom parameter group for enabling about for %s", var.postgres_rds_cluster_identifier) : data.gdp-middleware-helper_rds_postgres_parameter_group.paramater_group.description
 }
 
 resource "aws_db_parameter_group" "guardium" {
