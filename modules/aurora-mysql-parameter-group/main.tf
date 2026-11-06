@@ -14,13 +14,13 @@ data "aws_rds_cluster_parameter_group" "existing" {
 
 locals {
   cluster_parameter_group_name = data.aws_rds_cluster.cluster_metadata.db_cluster_parameter_group_name
-  engine_version = data.aws_rds_cluster.cluster_metadata.engine_version
-  
+  engine_version               = data.aws_rds_cluster.cluster_metadata.engine_version
+
   # Extract major version from engine version (e.g., "8.0.mysql_aurora.3.04.0" -> "8.0")
   major_version = split(".", local.engine_version)[0]
   minor_version = split(".", local.engine_version)[1]
-  family_name = format("aurora-mysql%s.%s", local.major_version, local.minor_version)
-  
+  family_name   = format("aurora-mysql%s.%s", local.major_version, local.minor_version)
+
   default_pg_name = format("default.%s", local.family_name)
   is_default_pg = contains(
     [local.cluster_parameter_group_name],
