@@ -20,7 +20,7 @@ variable "postgres_rds_cluster_identifier" {
 
 variable "force_failover" {
   type        = bool
-  default = true
+  default     = true
   description = "To failover the database instance, requires multi AZ databases. Results in minimal downtime"
 }
 

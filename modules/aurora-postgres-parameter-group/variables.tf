@@ -25,7 +25,7 @@ variable "aurora_postgres_cluster_identifier" {
 
 variable "force_failover" {
   type        = bool
-  default = false
+  default     = false
   description = "To failover the database cluster, requires multi AZ databases. Results in minimal downtime"
 }
 
@@ -47,4 +47,10 @@ variable "skip_reboot" {
   description = "Skip automatic reboot (audit logging won't work until manual reboot)"
   type        = bool
   default     = true
+}
+
+variable "cloudwatch_logs_exports" {
+  type        = list(string)
+  description = "List of log types to export to CloudWatch Logs (valid for Aurora PostgreSQL: postgresql, instance, iam-db-auth-error)"
+  default     = ["postgresql"]
 }

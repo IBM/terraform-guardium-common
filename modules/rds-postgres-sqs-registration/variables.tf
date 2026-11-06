@@ -10,17 +10,17 @@ variable "aws_region" {
 
 variable "postgres_rds_cluster_identifier" {
   type        = string
-  default = "guardium-postgres"
+  default     = "guardium-postgres"
   description = "DocumentDB cluster identifier to be monitored"
 }
 
 variable "aws_account_id" {
-  type = string
+  type        = string
   description = "The AWS account id, used to generate the universal connector name"
 }
 
 variable "log_group" {
-  type = string
+  type        = string
   description = "The name of the cloudwatch log group"
 }
 //////
@@ -104,8 +104,8 @@ variable "csv_event_filter" {
 }
 
 variable "codec_pattern" {
-  type = string
+  type        = string
   description = "codec_pattern for rds postgres"
-  default = "plain"
+  default     = "plain"
 }
 
