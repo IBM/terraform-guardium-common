@@ -28,12 +28,12 @@ variable "rds_cluster_identifier" {
 }
 
 variable "aws_account_id" {
-  type = string
+  type        = string
   description = "The AWS account id, used to generate the universal connector name"
 }
 
 variable "log_group" {
-  type = string
+  type        = string
   description = "The name of the cloudwatch log group. Can be a comma-separated list of log groups (e.g., '/aws/rds/instance/mydb/audit,/aws/rds/instance/mydb/error')"
 }
 
@@ -118,19 +118,19 @@ variable "csv_event_filter" {
 }
 
 variable "codec_pattern" {
-  type = string
+  type        = string
   description = "codec_pattern for rds database"
-  default = ""
+  default     = ""
 }
 
 variable "cloudwatch_endpoint" {
-  type = string
+  type        = string
   description = "Custom endpoint URL for AWS CloudWatch"
-  default = ""
+  default     = ""
 }
 
 variable "use_aws_bundled_ca" {
-  type = bool
+  type        = bool
   description = "Whether to use the AWS bundled CA certificates"
-  default = true
+  default     = true
 }

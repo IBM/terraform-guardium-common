@@ -9,15 +9,15 @@ data "aws_db_instance" "cluster_metadata" {
 
 # Use the appropriate data source based on the engine type
 data "gdp-middleware-helper_rds_mariadb" "mariadb_parameter_group" {
-  count = var.db_engine == "mariadb" ? 1 : 0
+  count         = var.db_engine == "mariadb" ? 1 : 0
   db_identifier = var.rds_cluster_identifier
-  region = var.aws_region
+  region        = var.aws_region
 }
 
 data "gdp-middleware-helper_rds_mysql" "mysql_parameter_group" {
-  count = var.db_engine == "mysql" ? 1 : 0
+  count         = var.db_engine == "mysql" ? 1 : 0
   db_identifier = var.rds_cluster_identifier
-  region = var.aws_region
+  region        = var.aws_region
 }
 
 locals {
@@ -27,7 +27,7 @@ locals {
   family_name = var.db_engine == "mariadb" ? (
     length(data.gdp-middleware-helper_rds_mariadb.mariadb_parameter_group) > 0 ?
     data.gdp-middleware-helper_rds_mariadb.mariadb_parameter_group[0].family_name : ""
-  ) : (
+    ) : (
     length(data.gdp-middleware-helper_rds_mysql.mysql_parameter_group) > 0 ?
     data.gdp-middleware-helper_rds_mysql.mysql_parameter_group[0].family_name : ""
   )
@@ -44,7 +44,7 @@ locals {
   raw_option_group = var.db_engine == "mariadb" ? (
     length(data.gdp-middleware-helper_rds_mariadb.mariadb_parameter_group) > 0 ?
     data.gdp-middleware-helper_rds_mariadb.mariadb_parameter_group[0].option_group : ""
-  ) : (
+    ) : (
     length(data.gdp-middleware-helper_rds_mysql.mysql_parameter_group) > 0 ?
     data.gdp-middleware-helper_rds_mysql.mysql_parameter_group[0].option_group : ""
   )
@@ -58,7 +58,7 @@ locals {
   engine_name = var.db_engine == "mariadb" ? (
     length(data.gdp-middleware-helper_rds_mariadb.mariadb_parameter_group) > 0 ?
     data.gdp-middleware-helper_rds_mariadb.mariadb_parameter_group[0].engine_name : ""
-  ) : (
+    ) : (
     length(data.gdp-middleware-helper_rds_mysql.mysql_parameter_group) > 0 ?
     data.gdp-middleware-helper_rds_mysql.mysql_parameter_group[0].engine_name : ""
   )
@@ -66,7 +66,7 @@ locals {
   major_version = var.db_engine == "mariadb" ? (
     length(data.gdp-middleware-helper_rds_mariadb.mariadb_parameter_group) > 0 ?
     data.gdp-middleware-helper_rds_mariadb.mariadb_parameter_group[0].major_version : ""
-  ) : (
+    ) : (
     length(data.gdp-middleware-helper_rds_mysql.mysql_parameter_group) > 0 ?
     data.gdp-middleware-helper_rds_mysql.mysql_parameter_group[0].major_version : ""
   )
@@ -77,21 +77,21 @@ locals {
 
 # Create a custom parameter group if using the default one
 resource "aws_db_parameter_group" "db_param_group" {
-  name   = local.parameter_group_name
-  family = local.family_name
+  name        = local.parameter_group_name
+  family      = local.family_name
   description = local.description
 
   parameter {
-    name  = "log_output"
-    value = "FILE"
+    name         = "log_output"
+    value        = "FILE"
     apply_method = "immediate"
   }
 
   lifecycle {
     ignore_changes = [
-      description,  # Ignore description changes to prevent replacement
-      tags,                      # Ignore tag changes
-      tags_all                   # Ignore tags_all changes
+      description, # Ignore description changes to prevent replacement
+      tags,        # Ignore tag changes
+      tags_all     # Ignore tags_all changes
     ]
   }
 
@@ -147,9 +147,9 @@ resource "aws_db_option_group" "audit" {
 
   lifecycle {
     ignore_changes = [
-      option_group_description,  # Ignore description changes to prevent replacement
-      tags,                      # Ignore tag changes
-      tags_all                   # Ignore tags_all changes
+      option_group_description, # Ignore description changes to prevent replacement
+      tags,                     # Ignore tag changes
+      tags_all                  # Ignore tags_all changes
     ]
   }
 
@@ -163,10 +163,10 @@ resource "gdp-middleware-helper_rds_modify" "enable_audit_logs" {
     aws_db_option_group.audit,
   ]
 
-  db_instance_identifier   = var.rds_cluster_identifier
-  region                   = var.aws_region
-  parameter_group_name     = aws_db_parameter_group.db_param_group.name
-  option_group_name        = aws_db_option_group.audit.name
-  cloudwatch_logs_exports  = var.cloudwatch_logs_exports
-  apply_immediately        = true
+  db_instance_identifier  = var.rds_cluster_identifier
+  region                  = var.aws_region
+  parameter_group_name    = aws_db_parameter_group.db_param_group.name
+  option_group_name       = aws_db_option_group.audit.name
+  cloudwatch_logs_exports = var.cloudwatch_logs_exports
+  apply_immediately       = true
 }

@@ -62,11 +62,11 @@ resource "aws_iam_role" "sqs_lambda_role" {
   }
 }
 
-data "aws_iam_policy" "AmazonSQSFullAccess" { name  = "AmazonSQSFullAccess" }
+data "aws_iam_policy" "AmazonSQSFullAccess" { name = "AmazonSQSFullAccess" }
 
-data "aws_iam_policy" "CloudWatchLogsFullAccess" { name  = "CloudWatchLogsFullAccess" }
+data "aws_iam_policy" "CloudWatchLogsFullAccess" { name = "CloudWatchLogsFullAccess" }
 
-data "aws_iam_policy" "CloudWatchEventsFullAccess" { name  = "CloudWatchEventsFullAccess" }
+data "aws_iam_policy" "CloudWatchEventsFullAccess" { name = "CloudWatchEventsFullAccess" }
 
 resource "aws_iam_policy_attachment" "sqs_lambda_role_sqs" {
   name       = "${var.name_prefix}_sqs_lambda_role_sqs-attachment"
