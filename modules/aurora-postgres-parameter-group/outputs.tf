@@ -5,5 +5,5 @@
 
 output "reboot_required" {
   description = "Whether manual reboot is required to enable audit logging"
-  value       = var.skip_reboot ? "Manual reboot required to enable audit logging" : "Audit logging enabled"
+  value       = var.skip_reboot ? "Manual reboot required to enable audit logging" : "Audit logging enabled (reboot completed)"
 }
