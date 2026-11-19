@@ -91,3 +91,16 @@ resource "gdp-middleware-helper_aurora_modify" "enable_audit_logs" {
   cloudwatch_logs_exports = var.cloudwatch_logs_exports
   apply_immediately       = true
 }
+
+# Reboot the Aurora cluster if skip_reboot is false
+resource "gdp-middleware-helper_aurora_reboot" "aurora_postgres_reboot" {
+  count = var.skip_reboot ? 0 : 1
+
+  depends_on = [
+    gdp-middleware-helper_aurora_modify.enable_audit_logs,
+  ]
+
+  cluster_identifier = var.aurora_postgres_cluster_identifier
+  region             = var.aws_region
+  force_failover     = var.force_failover
+}
