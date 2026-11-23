@@ -46,7 +46,7 @@ variable "parameter_group_family" {
 variable "skip_reboot" {
   description = "Skip automatic reboot (audit logging won't work until manual reboot)"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "cloudwatch_logs_exports" {
